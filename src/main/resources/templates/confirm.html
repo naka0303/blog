@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>[[ ${titleName} ]]</title>
+</head>
+<body>
+  <h1>[[ ${appName} ]]</h1>
+  <span th:inline="text">
+    ブログタイトル： [[${blog.title}]]<br>
+    投稿内容： [[${blog.content}]]
+  </span>
+</body>
+</html>
