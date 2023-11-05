@@ -6,17 +6,8 @@
 </head>
 <body>
   <h1>[[ ${appName} ]]</h1>
-  <table border="1">
-    <div th:each="blog : ${blogList}">
-  	  <tr>
-		<td>[[ ${blog.id} ]]</td>
-		<td>[[ ${blog.title} ]]</td>
-		<td>
-			<a th:href="@{'/blog_detail/' + ${blog.id}}">詳細</a>
-		</td>
-  	  </tr>
-  	</div>
-  </table>
+  <h2>[[ ${title} ]]</h2>
+  <p>[[ ${content} ]]</p>
   <br>
   <a th:href="@{/index}">メイン画面へ</a>
 </body>

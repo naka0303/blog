@@ -18,9 +18,23 @@ public class BlogService {
 	BlogRepository repository;
 	
 	/**
+	 * ブログ登録
+	 */
+	public void insert(Blog blog) {
+		repository.save(blog);
+	}
+	
+	/**
 	 * ブログ情報一覧取得
 	 */
 	public List<Blog> findAll() {
 		return repository.findAll();
+	}
+	
+	/**
+	 * ブログ情報詳細取得
+	 */
+	public Blog findDetail(Long id) {
+		return repository.findById(id).get();
 	}
 }

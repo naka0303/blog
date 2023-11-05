@@ -17,7 +17,7 @@ public class Blog {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id")
 	// ブログID
-	private Integer id;
+	private Long id;
 	
 	@Column(name="title")
 	// ブログタイトル

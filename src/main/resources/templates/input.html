@@ -15,7 +15,13 @@
     <textarea th:field="*{content}" />
     <span class="errorStr" th:errors="*{content}"></span><br>
     
+    <label for="user_id">ユーザーID：</label>
+    <textarea th:field="*{user_id}" />
+    <span class="errorStr" th:errors="*{user_id}"></span><br>
+    
     <button>送信</button>
   </form>
+  <br>
+  <a th:href="@{/index}">メイン画面へ</a>
 </body>
 </html>

@@ -11,6 +11,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.blog.model.Blog;
@@ -39,17 +40,8 @@ public class BlogController {
 		return "index";
 	}
 	
-	@GetMapping("/input")
-	public String input(@ModelAttribute Blog blog, Model model) {
-		model.addAttribute("titleName", titleName);
-	    model.addAttribute("appName", appName);
-	    
-		return "input";
-	}
-	
 	@GetMapping("/blog_list")
 	public String blogList(Model model) {
-		
 		// ブログ情報全取得
 		List<Blog> blogList = service.findAll();
 		
@@ -60,8 +52,34 @@ public class BlogController {
 		return "blogList";
 	}
 	
+	@GetMapping("/blog_detail/{id}")
+	public String blogDetail(@PathVariable Long id, Model model) {
+		// ブログ情報詳細取得
+		Blog blogDetail = service.findDetail(id);
+		
+		// ブログタイトルのみ取得
+		String title = blogDetail.getTitle();
+		// 投稿内容のみ取得
+		String content = blogDetail.getContent();
+		
+		model.addAttribute("titleName", titleName);
+	    model.addAttribute("appName", appName);
+	    model.addAttribute("title", title);
+	    model.addAttribute("content", content);
+		
+		return "blogDetail";
+	}
+	
+	@GetMapping("/input")
+	public String input(@ModelAttribute Blog blog, Model model) {
+		model.addAttribute("titleName", titleName);
+	    model.addAttribute("appName", appName);
+	    
+		return "input";
+	}
+	
 	@PostMapping("/confirm")
-	public String confirm(@Validated @ModelAttribute Blog blog, BindingResult result, Model model) {
+	public String confirm(@Validated @ModelAttribute Blog blog, BindingResult result, Model model) {		
 		model.addAttribute("titleName", titleName);
 	    model.addAttribute("appName", appName);
 	    
@@ -69,6 +87,17 @@ public class BlogController {
 			return "input";
 		}
 		
+		// ブログ登録
+		service.insert(blog);
+		
 		return "confirm";
+	}
+	
+	@PostMapping("complete")
+	public String complete(@Validated @ModelAttribute Blog blog, BindingResult result, Model model) {
+		model.addAttribute("titleName", titleName);
+	    model.addAttribute("appName", appName);
+	    
+	    return "complete";
 	}
 }
