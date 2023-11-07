@@ -19,9 +19,9 @@ public class User {
 	// ユーザーID
 	private Integer user_id;
 	
-	@Column(name="name")
+	@Column(name="username")
 	// ユーザー名
-	private String name;
+	private String username;
 	
 	@Column(name="email")
 	// メールアドレス
@@ -30,4 +30,8 @@ public class User {
 	@Column(name="age")
 	// 年齢
 	private Integer age;
+	
+	@Column(name="password")
+	// パスワード
+	private String password;
 }

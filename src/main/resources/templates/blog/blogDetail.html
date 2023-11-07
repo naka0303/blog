@@ -11,8 +11,11 @@
 		<a class="navbar-brand" href="#">マイページ</a>
 	</nav>
 	<br>
-	<a th:href="@{/input}" class="btn btn-secondary">ブログ投稿へ</a>
-	<br><br>
-  	<a th:href="@{/blog_list}" class="btn btn-secondary">ブログ一覧へ</a>
+	<h1 class="display-4">[[ ${title} ]]</h1>
+	<p>[[ ${content} ]]</p>
+	<br>
+	<div class="text-center">
+		<a th:href="@{/blog_list}" class="btn btn-secondary">ブログ一覧へ</a>
+	</div>
 </body>
 </html>

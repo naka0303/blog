@@ -49,7 +49,7 @@ public class BlogController {
 	    model.addAttribute("appName", appName);
 		model.addAttribute("blogList", blogList);
 		
-		return "blogList";
+		return "/blog/blogList";
 	}
 	
 	@GetMapping("/blog_detail/{id}")
@@ -67,7 +67,7 @@ public class BlogController {
 	    model.addAttribute("title", title);
 	    model.addAttribute("content", content);
 		
-		return "blogDetail";
+		return "/blog/blogDetail";
 	}
 	
 	@GetMapping("/input")
@@ -75,7 +75,7 @@ public class BlogController {
 		model.addAttribute("titleName", titleName);
 	    model.addAttribute("appName", appName);
 	    
-		return "input";
+		return "/blog/input";
 	}
 	
 	@PostMapping("/confirm")
@@ -84,13 +84,13 @@ public class BlogController {
 	    model.addAttribute("appName", appName);
 	    
 		if (result.hasErrors()) {
-			return "input";
+			return "/blog/input";
 		}
 		
 		// ブログ登録
 		service.insert(blog);
 		
-		return "confirm";
+		return "/blog/confirm";
 	}
 	
 	@PostMapping("complete")
@@ -98,6 +98,6 @@ public class BlogController {
 		model.addAttribute("titleName", titleName);
 	    model.addAttribute("appName", appName);
 	    
-	    return "complete";
+	    return "/blog/complete";
 	}
 }
