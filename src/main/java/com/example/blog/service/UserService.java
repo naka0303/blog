@@ -45,6 +45,7 @@ public class UserService implements UserDetailsService {
         user.setEmail(userDto.getEmail());
         // パスワードをハッシュ化してから保存
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setAuth(userDto.getAuth());
 
         // データベースへの保存
         repository.save(user); // UserRepositoryを使ってユーザーをデータベースに保存します

@@ -15,19 +15,22 @@ public class UserDto {
 	@Length(min=1, max=10)
 	private String username;
 	
+	// 年齢
+	@Positive
+	private Integer age;
+	
 	// メールアドレス
 	@NotBlank
 	@Length(min=10, max=64)
 	private String email;
 	
-	// 年齢
-	@Positive
-	private Integer age;
-	
 	// パスワード
 	@NotBlank
 	@Length(min=6, max=20)
 	private String password;
+	
+	// 権限
+	private String auth;
 
 	public Integer getUser_id() {
 		return user_id;
@@ -67,5 +70,13 @@ public class UserDto {
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public String getAuth() {
+		return auth;
+	}
+	
+	public void setAuth(String auth) {
+		this.auth = auth;
 	}
 }

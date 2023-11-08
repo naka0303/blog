@@ -34,4 +34,8 @@ public class User {
 	@Column(name="password")
 	// パスワード
 	private String password;
+	
+	@Column(name="auth")
+	// 権限
+	private String auth;
 }

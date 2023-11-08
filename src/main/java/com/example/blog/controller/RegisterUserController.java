@@ -64,6 +64,7 @@ public class RegisterUserController {
 	    this.session.setAttribute("password", password);
 	    this.session.setAttribute("age", age.toString());
 	    this.session.setAttribute("email", email);
+	    this.session.setAttribute("auth", "GENERAL");
 		
 		return "/user/confirm";
 	}
@@ -77,10 +78,12 @@ public class RegisterUserController {
 	    String password = (String) this.session.getAttribute("password");
 	    String age = (String) this.session.getAttribute("age");
 	    String email = (String) this.session.getAttribute("email");
+	    String auth = (String) this.session.getAttribute("auth");
 	    userDto.setUsername(username);
 	    userDto.setPassword(password);
 	    userDto.setAge(Integer.parseInt(age));
 	    userDto.setEmail(email);
+	    userDto.setAuth(auth);
 	    
 	    // ブログ登録
 	    service.save(userDto);
