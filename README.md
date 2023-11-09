@@ -66,6 +66,10 @@ Spring Bootで開発したブログアプリ
 └── target(target下は省略)
 ```
 
+## Spring Boot アノテーション
+(参考)  
+https://qiita.com/ist-a-ku/items/c20d67140402634cd5db
+
 ## バリデーション
 (参考)  
 https://b1san-blog.com/post/spring/spring-validation/

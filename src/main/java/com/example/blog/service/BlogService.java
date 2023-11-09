@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.blog.model.Blog;
+import com.example.blog.model.BlogDto;
 import com.example.blog.repository.BlogRepository;
 
 import jakarta.transaction.Transactional;
@@ -20,7 +21,14 @@ public class BlogService {
 	/**
 	 * ブログ登録
 	 */
-	public void insert(Blog blog) {
+	public void insert(BlogDto blogDto) {
+		// BlogDtoからBlogへの変換
+        Blog blog = new Blog();
+        
+        blog.setTitle(blogDto.getTitle());
+        blog.setContent(blogDto.getContent());       
+        blog.setUserId(blogDto.getUserId());
+		
 		repository.save(blog);
 	}
 	
