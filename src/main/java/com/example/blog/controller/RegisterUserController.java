@@ -33,7 +33,6 @@ public class RegisterUserController {
 	@Autowired
 	UserService service;
 	
-	@Autowired
 	public RegisterUserController(HttpSession session) {
 		this.session = session;
 	}

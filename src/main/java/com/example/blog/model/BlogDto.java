@@ -1,31 +1,25 @@
 package com.example.blog.model;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import org.hibernate.validator.constraints.Length;
 
-@Entity
-@Table(name = "posted_blog")
-public class Blog {
+import jakarta.validation.constraints.NotBlank;
+
+
+public class BlogDto {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id")
 	// ブログID
 	private Integer id;
 	
-	@Column(name="title")
 	// ブログタイトル
+	@NotBlank
+	@Length(min=1, max=50)
 	private String title;
 	
-	@Column(name="content")
 	// 投稿内容
+	@NotBlank
+	@Length(min=1, max=3000)
 	private String content;
 	
-	@Column(name="user_id")
 	// ユーザーID(registered_userテーブルのuser_idと同じ)
 	private Integer user_id;
 

@@ -5,6 +5,7 @@ import org.hibernate.validator.constraints.Length;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 
+
 public class UserDto {
 	
 	// ユーザーID

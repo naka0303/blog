@@ -25,18 +25,18 @@ public class UserService implements UserDetailsService {
 	
 	@Override // UserDetailsServiceインターフェースのメソッドを上書きします
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = repository.findByUsername(username); // ユーザー名でユーザーを検索します
+		User user = repository.findByUsername(username);
 	    if (user == null) {
-	    	throw new UsernameNotFoundException("User not found"); // ユーザーが見つからない場合、例外をスローします
+	    	throw new UsernameNotFoundException("User not found");
 	    }
-	    return new UserPrincipal(user); // ユーザーが見つかった場合、UserPrincipalを作成し返します
+	    return new UserPrincipal(user);
 	}
 	
 	public User findByUsername(String username) {
-        return repository.findByUsername(username); // ユーザー名でユーザーを検索し返します
+        return repository.findByUsername(username);
 	}
 	
-	@Transactional // トランザクションを開始します。メソッドが終了したらトランザクションがコミットされます。
+	@Transactional
     public void save(UserDto userDto) {
 		// UserDtoからUserへの変換
         User user = new User();
@@ -48,6 +48,6 @@ public class UserService implements UserDetailsService {
         user.setAuth(userDto.getAuth());
 
         // データベースへの保存
-        repository.save(user); // UserRepositoryを使ってユーザーをデータベースに保存します
+        repository.save(user);
     }
 }
