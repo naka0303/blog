@@ -22,7 +22,16 @@ public class BlogDto {
 	
 	// ユーザーID(registered_userテーブルのuser_idと同じ)
 	private Integer user_id;
-
+	
+	// 登録日時
+	private String created_at;
+	
+	// 更新日時
+	private String updated_at;
+	
+	// 削除日時
+	private String deleted_at;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -53,5 +62,29 @@ public class BlogDto {
 
 	public void setUserId(Integer user_id) {
 		this.user_id = user_id;
+	}
+
+	public String getCreatedAt() {
+		return created_at;
+	}
+
+	public void setCreatedAt(String created_at) {
+		this.created_at = created_at;
+	}
+
+	public String getUpdatedAt() {
+		return updated_at;
+	}
+
+	public void setUpdatedAt(String updated_at) {
+		this.updated_at = updated_at;
+	}
+
+	public String getDeletedAt() {
+		return deleted_at;
+	}
+
+	public void setDeletedAt(String deleted_at) {
+		this.deleted_at = deleted_at;
 	}
 }

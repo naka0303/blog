@@ -57,6 +57,10 @@ public class BlogController {
 	
 	@GetMapping("/blog_list")
 	public String blogList(Model model) {
+		
+		// URI取得
+		this.session.setAttribute("uri", blogService.getUri());
+		
 		// ブログ情報全取得
 		List<Blog> blogList = blogService.findAll();
 		
@@ -67,8 +71,30 @@ public class BlogController {
 		return "/blog/blogList";
 	}
 	
+	@GetMapping("/blog_list_by_user")
+	public String blogListByUser(Model model) {
+		
+		// URI取得
+		this.session.setAttribute("uri", blogService.getUri());
+		
+		// ログインユーザーを取得
+	    String username = SecurityContextHolder.getContext().getAuthentication().getName();
+	    User loginUser = userServive.findByUsername(username);
+	    Integer user_id = loginUser.getUserId();
+	    
+		// ブログ情報全取得
+		List<Blog> blogListByUser = blogService.findByUser(user_id);
+		
+		model.addAttribute("titleName", titleName);
+	    model.addAttribute("appName", appName);
+		model.addAttribute("blogListByUser", blogListByUser);
+		
+		return "/blog/blogListByUser";
+	}
+	
 	@GetMapping("/blog_detail/{id}")
 	public String blogDetail(@PathVariable Long id, Model model) {
+		
 		// ブログ情報詳細取得
 		Blog blogDetail = blogService.findDetail(id);
 		
@@ -79,6 +105,7 @@ public class BlogController {
 		
 		model.addAttribute("titleName", titleName);
 	    model.addAttribute("appName", appName);
+	    model.addAttribute("preUri", (String) this.session.getAttribute("uri"));
 	    model.addAttribute("title", title);
 	    model.addAttribute("content", content);
 		

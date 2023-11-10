@@ -12,7 +12,12 @@
 	<p>[[ ${content} ]]</p>
 	<br>
 	<div class="text-center">
-		<a th:href="@{/blog_list}" class="btn btn-secondary">ブログ一覧へ</a>
+		<th:block th:if="${preUri == 'http://localhost:8080/blog_list_by_user'}">
+			<a th:href="@{/blog_list_by_user}" class="btn btn-secondary">投稿ブログ一覧へ</a>
+		</th:block>
+		<th:block th:if="${preUri == 'http://localhost:8080/blog_list'}">
+			<a th:href="@{/blog_list}" class="btn btn-secondary">ブログ一覧へ</a>
+		</th:block>
 	</div>
 	
 	<div th:replace="commons/fragment::scripts"></div>

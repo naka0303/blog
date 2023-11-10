@@ -4,3 +4,8 @@
 	background-color : transparent;
 	color : black;
 }
+
+.blog_list_by_user {
+	border : none;
+	background : none;
+}

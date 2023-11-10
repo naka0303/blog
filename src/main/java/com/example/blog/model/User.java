@@ -36,7 +36,16 @@ public class User {
 	@Column(name="auth")
 	// 権限
 	private String auth;
-
+	
+	// 登録日時
+	private String created_at;
+	
+	// 更新日時
+	private String updated_at;
+	
+	// 削除日時
+	private String deleted_at;
+	
 	public Integer getUserId() {
 		return user_id;
 	}
@@ -83,5 +92,29 @@ public class User {
 
 	public void setAuth(String auth) {
 		this.auth = auth;
+	}
+	
+	public String getCreatedAt() {
+		return created_at;
+	}
+
+	public void setCreatedAt(String created_at) {
+		this.created_at = created_at;
+	}
+
+	public String getUpdatedAt() {
+		return updated_at;
+	}
+
+	public void setUpdatedAt(String updated_at) {
+		this.updated_at = updated_at;
+	}
+
+	public String getDeletedAt() {
+		return deleted_at;
+	}
+
+	public void setDeletedAt(String deleted_at) {
+		this.deleted_at = deleted_at;
 	}
 }

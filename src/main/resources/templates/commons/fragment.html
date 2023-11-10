@@ -34,8 +34,8 @@
 							</form>
 						</li>
 						<li>
-							<form method="post">
-								<input type="submit" name="logout" class="logout" value="投稿ブログ一覧"/>
+							<form th:action="@{/blog_list_by_user}" method="get">
+								<input type="submit" name="blog_list_by_user" class="blog_list_by_user" value="投稿ブログ一覧"/>
 							</form>
 						</li>
 						<li>
