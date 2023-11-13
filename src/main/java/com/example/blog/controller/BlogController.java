@@ -61,7 +61,7 @@ public class BlogController {
 		return "index";
 	}
 	
-	@GetMapping("/blog_list")
+	@GetMapping("/blogList")
 	public String blogList(Model model) {
 		
 		// URI取得
@@ -77,7 +77,7 @@ public class BlogController {
 		return "/blog/blogList";
 	}
 	
-	@GetMapping("/blog_list_by_user")
+	@GetMapping("/blogListByUser")
 	public String blogListByUser(Model model) {
 		
 		// URI取得

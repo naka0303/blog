@@ -14,7 +14,7 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
 	/**
 	 * ブログ情報一覧取得(ユーザーごと)
 	 */
-	@Query(value = "SELECT * FROM posted_blog WHERE user_id = :user_id", nativeQuery = true)
+	@Query(value = "SELECT * FROM posted_blog WHERE user_id = :user_id ORDER BY id ASC", nativeQuery = true)
 	public List<Blog> findByUser(Integer user_id);
 	
 	/**
