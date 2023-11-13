@@ -14,16 +14,20 @@
 				<th>ID</th>
 				<th>タイトル</th>
 				<th>投稿日時</th>
-				<th>更新日時</th>
+				<th>編集日時</th>
+				<th></th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
-			<div th:each="blog : ${blogList}">
+			<div th:each="blog : ${blogListByUser}">
 			<tr>
 				<td>[[ ${blog.id} ]]</td>
 				<td><a th:href="@{'/blog_detail/' + ${blog.id}}">[[ ${blog.title} ]]</a></td>
 				<td>[[ ${blog.createdAt} ]]</td>
 				<td>[[ ${blog.updatedAt} ]]</td>
+				<td><a th:href="@{'/blogEdit/' + ${blog.id}}">編集</a></td>
+				<td></td>
 			</tr>
   			</div>
 		</tbody>

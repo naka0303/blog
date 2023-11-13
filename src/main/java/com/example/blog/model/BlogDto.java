@@ -1,5 +1,7 @@
 package com.example.blog.model;
 
+import java.util.Date;
+
 import org.hibernate.validator.constraints.Length;
 
 import jakarta.validation.constraints.NotBlank;
@@ -22,7 +24,16 @@ public class BlogDto {
 	
 	// ユーザーID(registered_userテーブルのuser_idと同じ)
 	private Integer user_id;
-
+	
+	// 登録日時
+	private String created_at;
+	
+	// 更新日時
+	private Date updated_at;
+	
+	// 削除日時
+	private String deleted_at;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -53,5 +64,29 @@ public class BlogDto {
 
 	public void setUserId(Integer user_id) {
 		this.user_id = user_id;
+	}
+
+	public String getCreatedAt() {
+		return created_at;
+	}
+
+	public void setCreatedAt(String created_at) {
+		this.created_at = created_at;
+	}
+
+	public Date getUpdatedAt() {
+		return updated_at;
+	}
+
+	public void setUpdatedAt(Date dateNow) {
+		this.updated_at = dateNow;
+	}
+
+	public String getDeletedAt() {
+		return deleted_at;
+	}
+
+	public void setDeletedAt(String deleted_at) {
+		this.deleted_at = deleted_at;
 	}
 }
