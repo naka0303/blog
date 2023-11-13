@@ -13,15 +13,17 @@
 			<tr>
 				<th>ID</th>
 				<th>タイトル</th>
-				<th></th>
+				<th>投稿日時</th>
+				<th>更新日時</th>
 			</tr>
 		</thead>
 		<tbody>
 			<div th:each="blog : ${blogList}">
 			<tr>
 				<td>[[ ${blog.id} ]]</td>
-				<td>[[ ${blog.title} ]]</td>
-				<td><a th:href="@{'/blog_detail/' + ${blog.id}}">詳細</a></td>
+				<td><a th:href="@{'/blog_detail/' + ${blog.id}}">[[ ${blog.title} ]]</a></td>
+				<td>[[ ${blog.createdAt} ]]</td>
+				<td>[[ ${blog.updatedAt} ]]</td>
 			</tr>
   			</div>
 		</tbody>

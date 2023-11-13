@@ -1,5 +1,7 @@
 package com.example.blog.model;
 
+import java.util.Date;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -35,7 +37,7 @@ public class Blog {
 
 	@Column(name="updated_at")
 	// 更新日時
-	private String updated_at;
+	private Date updated_at;
 
 	@Column(name="deleted_at")
 	// 削除日時
@@ -81,11 +83,11 @@ public class Blog {
 		this.created_at = created_at;
 	}
 
-	public String getUpdatedAt() {
+	public Date getUpdatedAt() {
 		return updated_at;
 	}
 
-	public void setUpdatedAt(String updated_at) {
+	public void setUpdatedAt(Date updated_at) {
 		this.updated_at = updated_at;
 	}
 

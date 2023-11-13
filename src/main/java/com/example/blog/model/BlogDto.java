@@ -1,5 +1,7 @@
 package com.example.blog.model;
 
+import java.util.Date;
+
 import org.hibernate.validator.constraints.Length;
 
 import jakarta.validation.constraints.NotBlank;
@@ -27,7 +29,7 @@ public class BlogDto {
 	private String created_at;
 	
 	// 更新日時
-	private String updated_at;
+	private Date updated_at;
 	
 	// 削除日時
 	private String deleted_at;
@@ -72,12 +74,12 @@ public class BlogDto {
 		this.created_at = created_at;
 	}
 
-	public String getUpdatedAt() {
+	public Date getUpdatedAt() {
 		return updated_at;
 	}
 
-	public void setUpdatedAt(String updated_at) {
-		this.updated_at = updated_at;
+	public void setUpdatedAt(Date dateNow) {
+		this.updated_at = dateNow;
 	}
 
 	public String getDeletedAt() {

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+	<div th:replace="commons/fragment::meta"></div>
+	<div th:replace="commons/fragment::link"></div>
+	<div th:replace="commons/fragment::title"></div>
+</head>
+<body>
+	<div th:replace="commons/fragment::header"></div>
+	<br>
+	<form enctype="multipart/form-data" th:action="@{/blogEditComplete}" th:object="${blogDto}" method="post" novalidate>
+		<div class="container">
+			<div class="wrapper">
+				<div class="card bg-light">
+					<div class="card-header">ブログ投稿確認</div>
+					<div class="card-body">
+						<p>ブログタイトル： [[ ${blogDto.getTitle} ]]</p>
+						<p>投稿内容： [[ ${blogDto.getContent} ]]</p>
+						<br>
+						<div class="text-center">
+					    	<button class="btn btn-lg btn-primary btn-block" name="confirm" value="confirm" type="submit">登録</button>
+					    </div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</form>
+	<br>
+	<div class="text-center">
+		<a th:href="@{/blogEdit}" class="btn btn-secondary">戻る</a>
+	</div>
+	
+	<div th:replace="commons/fragment::scripts"></div>
+</body>
+</html>
