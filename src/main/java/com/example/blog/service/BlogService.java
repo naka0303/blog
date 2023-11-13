@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -32,11 +33,11 @@ public class BlogService {
 	 */
 	public void insert(BlogDto blogDto) {
 		// BlogDtoからBlogへの変換
-        Blog blog = new Blog();
-        
-        blog.setTitle(blogDto.getTitle());
-        blog.setContent(blogDto.getContent());       
-        blog.setUserId(blogDto.getUserId());
+		Blog blog = new Blog();
+		
+		blog.setTitle(blogDto.getTitle());
+		blog.setContent(blogDto.getContent());
+		blog.setUserId(blogDto.getUserId());
 		
 		repository.save(blog);
 	}
@@ -61,7 +62,8 @@ public class BlogService {
 	 * ブログ情報一覧取得
 	 */
 	public List<Blog> findAll() {
-		return repository.findAll();
+		return repository.findAll(
+				Sort.by(Sort.Direction.ASC, "id"));
 	}
 	
 	/**
