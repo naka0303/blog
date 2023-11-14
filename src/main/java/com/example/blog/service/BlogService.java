@@ -4,12 +4,12 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.blog.model.Blog;
 import com.example.blog.model.BlogDto;
+import com.example.blog.model.BlogUserDto;
 import com.example.blog.repository.BlogRepository;
 
 import jakarta.transaction.Transactional;
@@ -38,6 +38,9 @@ public class BlogService {
 		blog.setTitle(blogDto.getTitle());
 		blog.setContent(blogDto.getContent());
 		blog.setUserId(blogDto.getUserId());
+		blog.setCreatedAt(blogDto.getCreatedAt());
+		blog.setUpdatedAt(blogDto.getUpdatedAt());
+		blog.setDeletedAt(blogDto.getDeletedAt());
 		
 		repository.save(blog);
 	}
@@ -61,9 +64,8 @@ public class BlogService {
 	/**
 	 * ブログ情報一覧取得
 	 */
-	public List<Blog> findAll() {
-		return repository.findAll(
-				Sort.by(Sort.Direction.ASC, "id"));
+	public List<BlogUserDto> findAllJoinedUser() {
+		return repository.findAllJoinedUser();
 	}
 	
 	/**
