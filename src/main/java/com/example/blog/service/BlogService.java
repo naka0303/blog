@@ -62,6 +62,13 @@ public class BlogService {
 	}
 	
 	/**
+	 * ブログ削除
+	 */
+	public void delete(Long id) {
+		repository.deleteById(id);
+	}
+	
+	/**
 	 * ブログ情報一覧取得
 	 */
 	public List<BlogUserDto> findAllJoinedUser() {
