@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.example.blog.model.Blog;
-import com.example.blog.model.BlogDto;
 import com.example.blog.model.BlogUserDto;
+import com.example.blog.model.blog.Blog;
+import com.example.blog.model.blog.BlogDto;
 import com.example.blog.repository.BlogRepository;
 
 import jakarta.transaction.Transactional;
