@@ -1,25 +1,19 @@
-package com.example.blog.controller;
+package com.example.blog.controller.user;
 
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import com.example.blog.model.UserDto;
+import com.example.blog.model.user.UserDto;
+
 
 @Controller
 public class LoginController {
-	@Value("${title.name}")
-	private String titleName;
-	
-	@Value("${app.name}")
-	private String appName;
 	
 	@GetMapping("/login")
 	public String login(@ModelAttribute UserDto userDto, Model model) {
-		model.addAttribute("titleName", titleName);
-	    model.addAttribute("appName", appName);
+
 	    model.addAttribute("userDto", userDto);
 	    
 		return "/user/login";

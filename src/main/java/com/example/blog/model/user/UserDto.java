@@ -1,56 +1,54 @@
-package com.example.blog.model;
+package com.example.blog.model.user;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import java.util.Date;
 
-@Entity
-@Table(name = "registered_user")
-public class User {
+import org.hibernate.validator.constraints.Length;
+
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+
+
+public class UserDto {
 	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="user_id")
 	// ユーザーID
 	private Integer user_id;
 	
-	@Column(name="username")
 	// ユーザー名
+	@NotBlank
+	@Length(min=1, max=10)
 	private String username;
 	
-	@Column(name="email")
-	// メールアドレス
-	private String email;
-	
-	@Column(name="age")
 	// 年齢
+	@Positive
 	private Integer age;
 	
-	@Column(name="password")
+	// メールアドレス
+	@NotBlank
+	@Length(min=10, max=64)
+	private String email;
+	
 	// パスワード
+	@NotBlank
+	@Length(min=6, max=20)
 	private String password;
 	
-	@Column(name="auth")
 	// 権限
 	private String auth;
 	
 	// 登録日時
-	private String created_at;
+	private Date created_at;
 	
 	// 更新日時
-	private String updated_at;
+	private Date updated_at;
 	
 	// 削除日時
-	private String deleted_at;
+	private Date deleted_at;
 	
-	public Integer getUserId() {
+	public Integer getUser_id() {
 		return user_id;
 	}
 
-	public void setUserId(Integer user_id) {
+	public void setUser_id(Integer user_id) {
 		this.user_id = user_id;
 	}
 
@@ -85,36 +83,36 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
 	public String getAuth() {
 		return auth;
 	}
-
+	
 	public void setAuth(String auth) {
 		this.auth = auth;
 	}
 	
-	public String getCreatedAt() {
+	public Date getCreatedAt() {
 		return created_at;
 	}
 
-	public void setCreatedAt(String created_at) {
+	public void setCreatedAt(Date created_at) {
 		this.created_at = created_at;
 	}
 
-	public String getUpdatedAt() {
+	public Date getUpdatedAt() {
 		return updated_at;
 	}
 
-	public void setUpdatedAt(String updated_at) {
+	public void setUpdatedAt(Date updated_at) {
 		this.updated_at = updated_at;
 	}
 
-	public String getDeletedAt() {
+	public Date getDeletedAt() {
 		return deleted_at;
 	}
 
-	public void setDeletedAt(String deleted_at) {
+	public void setDeletedAt(Date deleted_at) {
 		this.deleted_at = deleted_at;
 	}
 }

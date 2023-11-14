@@ -22,7 +22,7 @@ public class WebSecurityConfig {
 		http
 			.authorizeHttpRequests(authorizeRequests ->
 				authorizeRequests
-					.requestMatchers("/css/**", "/login", "/signup", "user_confirm", "user_complete").permitAll()
+					.requestMatchers("/css/**", "/login", "/signup", "userConfirm", "userComplete").permitAll()
 					.anyRequest().authenticated()
 			)
 			.formLogin(formLogin -> 

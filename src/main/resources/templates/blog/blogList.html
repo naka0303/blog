@@ -22,7 +22,7 @@
 			<div th:each="blog : ${blogList}">
 			<tr>
 				<td>[[ ${blog.id} ]]</td>
-				<td><a th:href="@{'/blog_detail/' + ${blog.getId}}">[[ ${blog.title} ]]</a></td>
+				<td><a th:href="@{'/blogDetail/' + ${blog.getId}}">[[ ${blog.title} ]]</a></td>
 				<td>[[ ${blog.username} ]]</td>
 				<td>[[ ${blog.createdAt} ]]</td>
 				<td>[[ ${blog.updatedAt} ]]</td>

@@ -8,8 +8,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import com.example.blog.model.Blog;
 import com.example.blog.model.BlogUserDto;
+import com.example.blog.model.blog.Blog;
 
 public interface BlogRepository extends JpaRepository<Blog, Long> {
 	
