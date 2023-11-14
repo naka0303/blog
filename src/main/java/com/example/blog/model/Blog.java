@@ -33,7 +33,7 @@ public class Blog {
 	
 	@Column(name="created_at")
 	// 登録日時
-	private String created_at;
+	private Date created_at;
 
 	@Column(name="updated_at")
 	// 更新日時
@@ -41,7 +41,7 @@ public class Blog {
 
 	@Column(name="deleted_at")
 	// 削除日時
-	private String deleted_at;
+	private Date deleted_at;
 
 	public Integer getId() {
 		return id;
@@ -75,11 +75,11 @@ public class Blog {
 		this.user_id = user_id;
 	}
 
-	public String getCreatedAt() {
+	public Date getCreatedAt() {
 		return created_at;
 	}
 
-	public void setCreatedAt(String created_at) {
+	public void setCreatedAt(Date created_at) {
 		this.created_at = created_at;
 	}
 
@@ -91,11 +91,11 @@ public class Blog {
 		this.updated_at = updated_at;
 	}
 
-	public String getDeletedAt() {
+	public Date getDeletedAt() {
 		return deleted_at;
 	}
 
-	public void setDeletedAt(String deleted_at) {
+	public void setDeletedAt(Date deleted_at) {
 		this.deleted_at = deleted_at;
 	}
 }

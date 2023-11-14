@@ -26,13 +26,13 @@ public class BlogDto {
 	private Integer user_id;
 	
 	// 登録日時
-	private String created_at;
+	private Date created_at;
 	
 	// 更新日時
 	private Date updated_at;
 	
 	// 削除日時
-	private String deleted_at;
+	private Date deleted_at;
 	
 	public Integer getId() {
 		return id;
@@ -66,11 +66,11 @@ public class BlogDto {
 		this.user_id = user_id;
 	}
 
-	public String getCreatedAt() {
+	public Date getCreatedAt() {
 		return created_at;
 	}
 
-	public void setCreatedAt(String created_at) {
+	public void setCreatedAt(Date created_at) {
 		this.created_at = created_at;
 	}
 
@@ -82,11 +82,11 @@ public class BlogDto {
 		this.updated_at = dateNow;
 	}
 
-	public String getDeletedAt() {
+	public Date getDeletedAt() {
 		return deleted_at;
 	}
 
-	public void setDeletedAt(String deleted_at) {
+	public void setDeletedAt(Date deleted_at) {
 		this.deleted_at = deleted_at;
 	}
 }

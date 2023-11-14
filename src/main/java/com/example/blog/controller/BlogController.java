@@ -1,5 +1,7 @@
 package com.example.blog.controller;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.blog.model.Blog;
 import com.example.blog.model.BlogDto;
+import com.example.blog.model.BlogUserDto;
 import com.example.blog.model.User;
 import com.example.blog.service.BlogService;
 import com.example.blog.service.UserService;
@@ -68,7 +71,7 @@ public class BlogController {
 		this.session.setAttribute("uri", blogService.getUri());
 		
 		// ブログ情報全取得
-		List<Blog> blogList = blogService.findAll();
+		List<BlogUserDto> blogList = blogService.findAllJoinedUser();
 		
 		model.addAttribute("titleName", titleName);
 	    model.addAttribute("appName", appName);
@@ -226,10 +229,13 @@ public class BlogController {
 	}
 	
 	@PostMapping("complete")
-	public String complete(@Validated @ModelAttribute BlogDto blogDto, BindingResult result, Model model) {
-		
+	public String complete(@Validated @ModelAttribute BlogDto blogDto, BindingResult result, Model model) throws ParseException {
 		// 現在日時を取得
 		Date dateNow = new Date();
+				
+		// updated_atに登録する仮の日付フォーマットを定義
+		String kariDate = "1970-01-01 00:00:00";
+		SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
 		
 		String title = (String) session.getAttribute("title");
 		String content = (String) session.getAttribute("content");
@@ -238,8 +244,9 @@ public class BlogController {
 		blogDto.setTitle(title);
 		blogDto.setContent(content);
 		blogDto.setUserId(Integer.parseInt(user_id));
-		blogDto.setUpdatedAt(dateNow);
-	    
+		blogDto.setCreatedAt(dateNow);
+		blogDto.setUpdatedAt(sdformat.parse(kariDate));
+		blogDto.setDeletedAt(sdformat.parse(kariDate));
 	    model.addAttribute("titleName", titleName);
 	    model.addAttribute("appName", appName);
 	    model.addAttribute("blogDto", blogDto);
