@@ -101,6 +101,27 @@ public class BlogController {
 		return "/blog/blogListByUser";
 	}
 	
+	@GetMapping("/blogDelete/{id}")
+	public String blogDelete(@PathVariable Long id, BlogDto blogDto, Model model) {
+		
+		// ブログ削除
+		blogService.delete(id);
+	    
+		// ログインユーザーを取得
+	    String username = SecurityContextHolder.getContext().getAuthentication().getName();
+	    User loginUser = userServive.findByUsername(username);
+	    Integer user_id = loginUser.getUserId();
+	    
+		// ブログ情報全取得
+		List<Blog> blogListByUser = blogService.findByUser(user_id);
+	 		
+	 	model.addAttribute("titleName", titleName);
+	 	model.addAttribute("appName", appName);
+	 	model.addAttribute("blogListByUser", blogListByUser);
+		
+		return "/blog/blogListByUser";
+	}
+	
 	@GetMapping("/blogEdit/{id}")
 	public String blogEdit(@PathVariable Long id, BlogDto blogDto, Model model) {
 		
@@ -232,7 +253,7 @@ public class BlogController {
 	public String complete(@Validated @ModelAttribute BlogDto blogDto, BindingResult result, Model model) throws ParseException {
 		// 現在日時を取得
 		Date dateNow = new Date();
-				
+		
 		// updated_atに登録する仮の日付フォーマットを定義
 		String kariDate = "1970-01-01 00:00:00";
 		SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
