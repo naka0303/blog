@@ -1,7 +1,6 @@
 package com.example.blog.controller.blog;
 
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,10 +84,6 @@ public class PostBlogController {
 		// 現在日時を取得
 		Date dateNow = new Date();
 		
-		// updated_atに登録する仮の日付フォーマットを定義
-		String kariDate = "1970-01-01 00:00:00";
-		SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		
 		String title = (String) session.getAttribute("title");
 		String content = (String) session.getAttribute("content");
 		String user_id = (String) session.getAttribute("user_id");
@@ -97,9 +92,9 @@ public class PostBlogController {
 		blogDto.setContent(content);
 		blogDto.setUserId(Integer.parseInt(user_id));
 		blogDto.setCreatedAt(dateNow);
-		blogDto.setUpdatedAt(sdformat.parse(kariDate));
-		blogDto.setDeletedAt(sdformat.parse(kariDate));
-	
+		blogDto.setUpdatedAt(null);
+		blogDto.setDeletedAt(null);
+		
 		model.addAttribute("blogDto", blogDto);
 		
 		// ブログ登録

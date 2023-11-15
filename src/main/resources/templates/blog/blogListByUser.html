@@ -14,7 +14,6 @@
 				<th>ID</th>
 				<th>タイトル</th>
 				<th>投稿日時</th>
-				<th>編集日時</th>
 				<th></th>
 				<th></th>
 			</tr>
@@ -25,7 +24,6 @@
 				<td>[[ ${blog.id} ]]</td>
 				<td><a th:href="@{'/blogDetail/' + ${blog.id}}">[[ ${blog.title} ]]</a></td>
 				<td>[[ ${blog.createdAt} ]]</td>
-				<td>[[ ${blog.updatedAt} ]]</td>
 				<td><a th:href="@{'/blogEdit/' + ${blog.id}}">編集</a></td>
 				<td><a th:href="@{'/blogDelete/' + ${blog.id}}">削除</a></td>
 				<td></td>
