@@ -25,17 +25,12 @@ public class BlogUserDto {
 	// 登録日時
 	private Date created_at;
 
-	@Column(name="updated_at")
-	// 更新日時
-	private Date updated_at;
-	
 	public BlogUserDto(Object[] objects) {
 		this(
 				(Integer)objects[0],
 				(String)objects[1],
 				(String)objects[2],
-				Date.from((Instant)objects[3]),
-				Date.from((Instant)objects[4])
+				Date.from((Instant)objects[3])
 				);
 	}
 
@@ -69,13 +64,5 @@ public class BlogUserDto {
 
 	public void setCreatedAt(Date created_at) {
 		this.created_at = created_at;
-	}
-	
-	public Date getUpdatedAt() {
-		return updated_at;
-	}
-
-	public void setUpdatedAt(Date updated_at) {
-		this.updated_at = updated_at;
 	}
 }

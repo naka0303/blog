@@ -19,7 +19,7 @@ import jakarta.transaction.Transactional;
 public class BlogService {
 	
 	@Autowired
-	BlogRepository repository;
+	BlogRepository blogRepository;
 	
 	/** 
 	 * URI取得
@@ -39,10 +39,12 @@ public class BlogService {
 		blog.setContent(blogDto.getContent());
 		blog.setUserId(blogDto.getUserId());
 		blog.setCreatedAt(blogDto.getCreatedAt());
-		blog.setUpdatedAt(blogDto.getUpdatedAt());
-		blog.setDeletedAt(blogDto.getDeletedAt());
+		// blog.setUpdatedAt(blogDto.getUpdatedAt());
+		blog.setUpdatedAt(null);
+		// blog.setDeletedAt(blogDto.getDeletedAt());
+		blog.setDeletedAt(null);
 		
-		repository.save(blog);
+		blogRepository.save(blog);
 	}
 	
 	/**
@@ -58,41 +60,41 @@ public class BlogService {
 		blog.setUserId(blogDto.getUserId());
 		blog.setUpdatedAt(blogDto.getUpdatedAt());
 		
-		repository.edit(blog.getTitle(), blog.getContent(), blog.getUpdatedAt(), blog.getId());
+		blogRepository.edit(blog.getTitle(), blog.getContent(), blog.getUpdatedAt(), blog.getId());
 	}
 	
 	/**
 	 * ブログ削除
 	 */
 	public void delete(Long id) {
-		repository.deleteById(id);
+		blogRepository.deleteById(id);
 	}
 	
 	/**
 	 * ブログ情報一覧取得
 	 */
 	public List<BlogUserDto> findAllJoinedUser() {
-		return repository.findAllJoinedUser();
+		return blogRepository.findAllJoinedUser();
 	}
 	
 	/**
 	 * ブログ情報一覧取得(ユーザーごと)
 	 */
 	public List<Blog> findByUser(Integer user_id) {
-		return repository.findByUser(user_id);
+		return blogRepository.findByUser(user_id);
 	}
 	
 	/**
 	 * ブログ情報取得(IDごと)
 	 */
 	public Optional<Blog> findById(Long id) {
-		return repository.findById(id);
+		return blogRepository.findById(id);
 	}
 	
 	/**
 	 * ブログ情報詳細取得
 	 */
 	public Blog findDetail(Long id) {
-		return repository.findById(id).get();
+		return blogRepository.findById(id).get();
 	}
 }

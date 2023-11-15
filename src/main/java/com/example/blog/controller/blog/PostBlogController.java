@@ -97,9 +97,11 @@ public class PostBlogController {
 		blogDto.setContent(content);
 		blogDto.setUserId(Integer.parseInt(user_id));
 		blogDto.setCreatedAt(dateNow);
-		blogDto.setUpdatedAt(sdformat.parse(kariDate));
-		blogDto.setDeletedAt(sdformat.parse(kariDate));
-	
+		// blogDto.setUpdatedAt(sdformat.parse(kariDate));
+		blogDto.setUpdatedAt(null);
+		// blogDto.setDeletedAt(sdformat.parse(kariDate));
+		blogDto.setDeletedAt(null);
+		
 		model.addAttribute("blogDto", blogDto);
 		
 		// ブログ登録
