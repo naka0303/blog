@@ -39,9 +39,7 @@ public class BlogService {
 		blog.setContent(blogDto.getContent());
 		blog.setUserId(blogDto.getUserId());
 		blog.setCreatedAt(blogDto.getCreatedAt());
-		// blog.setUpdatedAt(blogDto.getUpdatedAt());
 		blog.setUpdatedAt(null);
-		// blog.setDeletedAt(blogDto.getDeletedAt());
 		blog.setDeletedAt(null);
 		
 		blogRepository.save(blog);
