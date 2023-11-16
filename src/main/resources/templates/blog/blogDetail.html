@@ -12,10 +12,10 @@
 	<p>[[ ${content} ]]</p>
 	<br>
 	<div class="text-center">
-		<th:block th:if="${preUri == 'http://localhost:8080/blog_list_by_user'}">
+		<th:block th:if="${#strings.contains(preUri, 'blogListByUser')}">
 			<a th:href="@{/blogListByUser}" class="btn btn-secondary">投稿ブログ一覧へ</a>
 		</th:block>
-		<th:block th:if="${preUri == 'http://localhost:8080/blog_list'}">
+		<th:block th:unless="${#strings.contains(preUri, 'blogListByUser')}">
 			<a th:href="@{/blogList}" class="btn btn-secondary">ブログ一覧へ</a>
 		</th:block>
 	</div>
