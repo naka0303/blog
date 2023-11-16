@@ -39,12 +39,12 @@ public class ListBlogController {
 	@GetMapping("/blogList")
 	public String blogList(Model model) {
 		
-		// URI取得
-		this.session.setAttribute("uri", blogService.getUri());
-		
 		// ブログ情報全取得
 		List<BlogUserDto> blogList = blogService.findAllJoinedUser();
-
+		
+		// URIをセッション管理
+		session.setAttribute("preUri", blogService.getUri());
+		
 		model.addAttribute("blogList", blogList);
 		
 		return "/blog/blogList";
@@ -53,9 +53,6 @@ public class ListBlogController {
 	@GetMapping("/blogListByUser")
 	public String blogListByUser(Model model) {
 		
-		// URI取得
-		this.session.setAttribute("uri", blogService.getUri());
-		
 		// ログインユーザーを取得
 	    String username = SecurityContextHolder.getContext().getAuthentication().getName();
 	    User loginUser = userServive.findByUsername(username);
@@ -63,6 +60,9 @@ public class ListBlogController {
 	    
 		// ブログ情報全取得
 		List<Blog> blogListByUser = blogService.findByUser(user_id);
+		
+		// URIをセッション管理
+		session.setAttribute("preUri", blogService.getUri());
 		
 		model.addAttribute("blogListByUser", blogListByUser);
 		

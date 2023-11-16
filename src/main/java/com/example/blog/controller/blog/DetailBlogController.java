@@ -43,7 +43,7 @@ public class DetailBlogController {
 		// 投稿内容のみ取得
 		String content = blogDetail.getContent();
 		
-		model.addAttribute("preUri", (String) this.session.getAttribute("uri"));
+		model.addAttribute("preUri", (String) this.session.getAttribute("preUri"));
 		model.addAttribute("title", title);
 		model.addAttribute("content", content);
 		
