@@ -9,9 +9,9 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class BlogUserDto {
 	
-	@Column(name="id")
+	@Column(name="blog_id")
 	// ブログID
-	private Integer id;
+	private Integer blog_id;
 	
 	@Column(name="title")
 	// ブログタイトル
@@ -34,12 +34,12 @@ public class BlogUserDto {
 				);
 	}
 
-	public Integer getId() {
-		return id;
+	public Integer getBlogId() {
+		return blog_id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setBlogId(Integer blog_id) {
+		this.blog_id = blog_id;
 	}
 
 	public String getTitle() {

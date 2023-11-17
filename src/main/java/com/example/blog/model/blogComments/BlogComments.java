@@ -1,4 +1,4 @@
-package com.example.blog.model.blog;
+package com.example.blog.model.blogComments;
 
 import java.util.Date;
 
@@ -11,53 +11,53 @@ import jakarta.persistence.Table;
 
 
 @Entity
-@Table(name = "blog")
-public class Blog {
+@Table(name = "blog_comments")
+public class BlogComments {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="blog_id")
+    @Column(name="comment_id")
+	// コメントID
+	private Integer comment_id;
+	
+	@Column(name="blog_id")
 	// ブログID
 	private Integer blog_id;
 	
-	@Column(name="title")
-	// ブログタイトル
-	private String title;
-	
 	@Column(name="content")
-	// 投稿内容
+	// コメント
 	private String content;
 	
-	@Column(name="user_id")
-	// ユーザーID(registered_userテーブルのuser_idと同じ)
-	private Integer user_id;
+	@Column(name="from_user_id")
+	// コメント投稿ユーザーID
+ 	private Integer from_user_id;
 	
 	@Column(name="created_at")
-	// 登録日時
+	// 投稿日時
 	private Date created_at;
-
+	
 	@Column(name="updated_at")
 	// 更新日時
 	private Date updated_at;
-
+	
 	@Column(name="deleted_at")
 	// 削除日時
 	private Date deleted_at;
 
+	public Integer getCommentId() {
+		return comment_id;
+	}
+
+	public void setCommentId(Integer comment_id) {
+		this.comment_id = comment_id;
+	}
+	
 	public Integer getBlogId() {
 		return blog_id;
 	}
 
 	public void setBlogId(Integer blog_id) {
 		this.blog_id = blog_id;
-	}
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
 	}
 
 	public String getContent() {
@@ -68,12 +68,12 @@ public class Blog {
 		this.content = content;
 	}
 
-	public Integer getUserId() {
-		return user_id;
+	public Integer getFromUserId() {
+		return from_user_id;
 	}
 
-	public void setUserId(Integer user_id) {
-		this.user_id = user_id;
+	public void setFromUserId(Integer from_user_id) {
+		this.from_user_id = from_user_id;
 	}
 
 	public Date getCreatedAt() {

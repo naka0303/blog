@@ -40,23 +40,23 @@ public class EditBlogController {
 		this.session = session;
 	}
 
-	@GetMapping("/blogEdit/{id}")
-	public String blogEdit(@PathVariable Long id, BlogDto blogDto, Model model) {
+	@GetMapping("/blogEdit/{blog_id}")
+	public String blogEdit(@PathVariable Long blogId, BlogDto blogDto, Model model) {
 		
 		// 編集ボタンが押されたブログ情報を取得
-		Optional<Blog> targetBlog = blogService.findById(id);
+		Optional<Blog> targetBlog = blogService.findByBlogId(blogId);
 		
 		// ブログ情報を要素ごとに取得
 		String title = targetBlog.get().getTitle();
 		String content = targetBlog.get().getContent();
-		Integer user_id = targetBlog.get().getUserId();
+		Integer userId = targetBlog.get().getUserId();
 		
-		blogDto.setId(Integer.parseInt(id.toString()));
+		// blogDto.setBlogId(Integer.parseInt(blogId.toString()));
 		blogDto.setTitle(title);
 		blogDto.setContent(content);
-		blogDto.setUserId(user_id);
+		// blogDto.setUserId(userId);
 		
-		session.setAttribute("id", blogDto.getId());
+		// session.setAttribute("blogId", blogDto.getBlogId());
 		
 		model.addAttribute("blogDto", blogDto);
 		
@@ -85,10 +85,10 @@ public class EditBlogController {
 		// 現在日時を取得
 		Date dateNow = new Date();
 		
-		blogDto.setId((Integer)session.getAttribute("id"));
+		// blogDto.setBlogId((Integer)session.getAttribute("blogId"));
 		blogDto.setTitle((String)session.getAttribute("title"));
 		blogDto.setContent((String)session.getAttribute("content"));
-		blogDto.setUpdatedAt(dateNow);
+		// blogDto.setUpdatedAt(dateNow);
 		
 	    model.addAttribute("blogDto", blogDto);
 	    

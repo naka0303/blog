@@ -19,6 +19,17 @@
 			<a th:href="@{/blogList}" class="btn btn-secondary">ブログ一覧へ</a>
 		</th:block>
 	</div>
+	<hr>
+	<div th:each="comment : ${comments}">
+		<p>[[ ${comment} ]]</p>
+	</div>
+	<form enctype="multipart/form-data" th:action="@{'/blogComment/' + ${id}}" th:object="${blogCommentsDto}" method="post" novalidate>
+		<textarea class="form-control form-control-lg" rows="3" name="blogComment" placeholder="ブログコメント"></textarea>
+		<br>
+		<div class="text-center">
+			<button class="btn btn-lg btn-primary btn-block" name="blogComment" type="submit">コメント</button>
+		</div>
+	</form>
 	
 	<div th:replace="commons/fragment::scripts"></div>
 </body>
