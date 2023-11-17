@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.blog.model.user.UserDto;
+import com.example.blog.model.user.UsersDto;
 import com.example.blog.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -36,7 +36,7 @@ public class RegisterUserController {
 	}
 	
 	@GetMapping("/signup")
-	public String signup(@ModelAttribute UserDto userDto, Model model) {
+	public String signup(@ModelAttribute UsersDto userDto, Model model) {
 		
 	    model.addAttribute("userDto", userDto);
 	    
@@ -44,7 +44,7 @@ public class RegisterUserController {
 	}
 	
 	@PostMapping("/userConfirm")
-	public String userConfirm(@Validated @ModelAttribute UserDto userDto, BindingResult result, Model model) {
+	public String userConfirm(@Validated @ModelAttribute UsersDto userDto, BindingResult result, Model model) {
 	    
 		if (result.hasErrors()) {
 	    	return "/user/signup";
@@ -65,7 +65,7 @@ public class RegisterUserController {
 	}
 	
 	@PostMapping("userComplete")
-	public String userComplete(@Validated @ModelAttribute UserDto userDto, BindingResult result, Model model) throws ParseException {
+	public String userComplete(@Validated @ModelAttribute UsersDto userDto, BindingResult result, Model model) throws ParseException {
 		
 		// 現在日時を取得
 		Date dateNow = new Date();

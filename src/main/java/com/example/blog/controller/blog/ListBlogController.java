@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.example.blog.model.BlogUserDto;
 import com.example.blog.model.blog.Blog;
-import com.example.blog.model.user.User;
+import com.example.blog.model.user.Users;
 import com.example.blog.service.BlogService;
 import com.example.blog.service.UserService;
 
@@ -55,7 +55,7 @@ public class ListBlogController {
 		
 		// ログインユーザーを取得
 	    String username = SecurityContextHolder.getContext().getAuthentication().getName();
-	    User loginUser = userServive.findByUsername(username);
+	    Users loginUser = userServive.findByUsername(username);
 	    Integer user_id = loginUser.getUserId();
 	    
 		// ブログ情報全取得
