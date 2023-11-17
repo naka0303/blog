@@ -7,8 +7,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.blog.model.user.User;
-import com.example.blog.model.user.UserDto;
+import com.example.blog.model.user.Users;
+import com.example.blog.model.user.UsersDto;
 import com.example.blog.repository.UserRepository;
 
 import jakarta.transaction.Transactional;
@@ -18,40 +18,39 @@ import jakarta.transaction.Transactional;
 public class UserService implements UserDetailsService {
 	
 	@Autowired
-	UserRepository repository;
+	UserRepository userRepository;
 	
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = repository.findByUsername(username);
-	    if (user == null) {
+		Users users = userRepository.findByUsername(username);
+	    if (users == null) {
 	    	throw new UsernameNotFoundException("User not found");
 	    }
-	    return new UserPrincipal(user);
+	    return new UserPrincipal(users);
 	}
 	
-	public User findByUsername(String username) {
-        return repository.findByUsername(username);
+	public Users findByUsername(String username) {
+        return userRepository.findByUsername(username);
 	}
 	
 	@Transactional
-    public void save(UserDto userDto) {
+	public void save(UsersDto userDto) {
 		// UserDtoからUserへの変換
-        User user = new User();
-        
-        user.setUsername(userDto.getUsername());
-        user.setAge(userDto.getAge());
-        user.setEmail(userDto.getEmail());
-        // パスワードをハッシュ化してから保存
-        user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        user.setAuth(userDto.getAuth());
-        user.setCreatedAt(userDto.getCreatedAt());
-		user.setUpdatedAt(userDto.getUpdatedAt());
-		user.setDeletedAt(userDto.getDeletedAt());
-
-        // データベースへの保存
-        repository.save(user);
+		Users users = new Users();
+		
+		users.setUsername(userDto.getUsername());
+		users.setAge(userDto.getAge());
+		users.setEmail(userDto.getEmail());
+		users.setPassword(passwordEncoder.encode(userDto.getPassword())); // パスワードをハッシュ化してセット
+		users.setAuth(userDto.getAuth());
+		users.setCreatedAt(userDto.getCreatedAt());
+		users.setUpdatedAt(userDto.getUpdatedAt());
+		users.setDeletedAt(userDto.getDeletedAt());
+		
+		// DB保存
+		userRepository.save(users);
     }
 }

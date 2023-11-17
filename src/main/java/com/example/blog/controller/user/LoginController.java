@@ -5,16 +5,16 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
-import com.example.blog.model.user.UserDto;
+import com.example.blog.model.user.UsersDto;
 
 
 @Controller
 public class LoginController {
 	
 	@GetMapping("/login")
-	public String login(@ModelAttribute UserDto userDto, Model model) {
+	public String login(@ModelAttribute UsersDto usersDto, Model model) {
 
-	    model.addAttribute("userDto", userDto);
+	    model.addAttribute("usersDto", usersDto);
 	    
 		return "/user/login";
 	}
