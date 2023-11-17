@@ -40,6 +40,14 @@ public class PostBlogController {
 	public String input(
 			@ModelAttribute BlogForm blogForm,
 			Model model) {
+		
+		BlogForm blogFormSession = (BlogForm) this.session.getAttribute("blogFormSession");
+		if (blogFormSession != null) {
+			model.addAttribute("titleSession", blogFormSession.getTitle());
+			model.addAttribute("contentSession", blogFormSession.getContent());
+		}
+		
+		model.addAttribute("blogForm", blogForm);
 		return "/blog/input";
 	}
 	
@@ -54,25 +62,24 @@ public class PostBlogController {
 			return "/blog/input";
 		}
 		
-		session.setAttribute("blogForm", blogForm);
+		this.session.setAttribute("blogFormSession", blogForm);
 		model.addAttribute("blogForm", blogForm);
-		
 		return "/blog/confirm";
 	}
 	
 	@PostMapping("complete")
 	public String complete(
+			@ModelAttribute BlogForm blogForm,
 			Model model) {
 		
-		BlogForm blogForm = (BlogForm) session.getAttribute("blogForm");
+		BlogForm blogFormSession = (BlogForm) this.session.getAttribute("blogFormSession");
 		
 		BlogDto blogDto = new BlogDto();
-		blogDto.setTitle(blogForm.getTitle());
-		blogDto.setContent(blogForm.getContent());
+		blogDto.setTitle(blogFormSession.getTitle());
+		blogDto.setContent(blogFormSession.getContent());
 		
 		// ブログ登録
 		blogService.insert(blogDto);
-	    
 		return "/blog/complete";
 	}
 }

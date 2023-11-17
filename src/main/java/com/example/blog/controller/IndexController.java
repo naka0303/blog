@@ -39,12 +39,9 @@ public class IndexController {
 	
 	@GetMapping("/index")
 	public String index(Model model) {
-		model.addAttribute("titleName", titleName);
-		model.addAttribute("appName", appName);
 		
 		// セッション破棄
-		this.session.removeAttribute("title");
-		this.session.removeAttribute("content");
+		this.session.removeAttribute("blogFormSession");
 		
 		return "index";
 	}
