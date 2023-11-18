@@ -32,20 +32,18 @@ public class DetailBlogController {
 		this.session = session;
 	}
 	
-	@GetMapping("/blogDetail/{id}")
-	public String blogDetail(@PathVariable Long id, Model model) {
+	@GetMapping("/blogDetail/{blogId}")
+	public String blogDetail(
+			@PathVariable Long blogId,
+			Model model) {
 		
-		// ブログ情報詳細取得
-		Blog blogDetail = blogService.findDetail(id);
+		// ブログ詳細情報取得
+		Blog blogDetail = blogService.findDetail(blogId);
 		
-		// ブログタイトルのみ取得
-		String title = blogDetail.getTitle();
-		// 投稿内容のみ取得
-		String content = blogDetail.getContent();
-		
+		// 値渡し
 		model.addAttribute("preUri", (String) this.session.getAttribute("preUri"));
-		model.addAttribute("title", title);
-		model.addAttribute("content", content);
+		model.addAttribute("title", blogDetail.getTitle());
+		model.addAttribute("content", blogDetail.getContent());
 		
 		return "/blog/blogDetail";
 	}

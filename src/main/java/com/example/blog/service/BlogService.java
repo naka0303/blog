@@ -107,7 +107,7 @@ public class BlogService {
 	/**
 	 * ブログ情報詳細取得
 	 */
-	public Blog findDetail(Long id) {
-		return blogRepository.findById(id).get();
+	public Blog findDetail(Long blogId) {
+		return blogRepository.findById(blogId).get();
 	}
 }
