@@ -11,16 +11,17 @@ import org.springframework.data.jpa.repository.Query;
 import com.example.blog.model.BlogUserDto;
 import com.example.blog.model.blog.Blog;
 
+
 public interface BlogRepository extends JpaRepository<Blog, Long> {
 	
 	/**
-	 * ブログ情報一覧取得
+	 * ブログ情報全取得
 	 * @return 
 	 */
-	@Query(value = "SELECT posted_blog.id, posted_blog.title, registered_user.username, posted_blog.created_at " +
-					"FROM posted_blog " +
-					"INNER JOIN registered_user ON (posted_blog.user_id = registered_user.user_id) " +
-					"ORDER BY posted_blog.id ASC", nativeQuery = true)
+	@Query(value = "SELECT blogs.blog_id, blogs.title, users.username, blogs.created_at " +
+					"FROM blogs " +
+					"INNER JOIN users ON (blogs.user_id = users.user_id) " +
+					"ORDER BY blogs.blog_id ASC", nativeQuery = true)
 	public List<Object[]> findAllJoinedUserRaw();
 	
 	default List<BlogUserDto> findAllJoinedUser() {
@@ -31,10 +32,13 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
 	}
 	
 	/**
-	 * ブログ情報一覧取得(ユーザーごと)
+	 * ブログ情報全取得(ユーザーごと)
+	 * @param userId
+	 * @return
 	 */
-	@Query(value = "SELECT * FROM posted_blog WHERE user_id = :user_id ORDER BY id ASC", nativeQuery = true)
-	public List<Blog> findByUser(Integer user_id);
+	@Query(value = "SELECT * FROM blogs " +
+					"WHERE user_id = :userId ORDER BY blog_id ASC", nativeQuery = true)
+	public List<Blog> findByUser(Integer userId);
 	
 	/**
 	 * ブログ編集

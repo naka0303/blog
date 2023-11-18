@@ -81,17 +81,20 @@ public class BlogService {
 	}
 	
 	/**
-	 * ブログ情報一覧取得
+	 * ブログ情報全取得
+	 * @return
 	 */
 	public List<BlogUserDto> findAllJoinedUser() {
 		return blogRepository.findAllJoinedUser();
 	}
 	
 	/**
-	 * ブログ情報一覧取得(ユーザーごと)
+	 * ブログ情報全取得(ユーザーごと)
+	 * @param userId
+	 * @return
 	 */
-	public List<Blog> findByUser(Integer user_id) {
-		return blogRepository.findByUser(user_id);
+	public List<Blog> findByUser(Integer userId) {
+		return blogRepository.findByUser(userId);
 	}
 	
 	/**
