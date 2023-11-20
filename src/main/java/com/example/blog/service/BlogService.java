@@ -59,16 +59,17 @@ public class BlogService {
 	
 	/**
 	 * ブログ編集
+	 * @param blogDto
 	 */
 	public void edit(BlogDto blogDto) {
+		
 		// BlogDtoからBlogへの変換
 		Blog blog = new Blog();
 		
-		blog.setBlogId(blogDto.getId());
+		blog.setBlogId(blogDto.getBlogId());
 		blog.setTitle(blogDto.getTitle());
 		blog.setContent(blogDto.getContent());
-		blog.setUserId(blogDto.getUserId());
-		blog.setUpdatedAt(blogDto.getUpdatedAt());
+		blog.setUpdatedAt(new Date());
 		
 		blogRepository.edit(blog.getTitle(), blog.getContent(), blog.getUpdatedAt(), blog.getBlogId());
 	}

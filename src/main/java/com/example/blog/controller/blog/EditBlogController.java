@@ -1,6 +1,5 @@
 package com.example.blog.controller.blog;
 
-import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,6 @@ import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,10 +14,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.blog.model.blog.Blog;
 import com.example.blog.model.blog.BlogDto;
+import com.example.blog.model.blog.BlogForm;
 import com.example.blog.service.BlogService;
 import com.example.blog.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 
 @Controller
@@ -40,61 +40,59 @@ public class EditBlogController {
 		this.session = session;
 	}
 
-	@GetMapping("/blogEdit/{id}")
-	public String blogEdit(@PathVariable Long id, BlogDto blogDto, Model model) {
+	@GetMapping("/blogEdit/{blogId}")
+	public String blogEdit(
+			@PathVariable Long blogId,
+			@ModelAttribute BlogForm blogForm,
+			Model model) {
+		
+		BlogForm blogFormSession = (BlogForm) this.session.getAttribute("blogFormSession");
+		if (blogFormSession != null) {
+			model.addAttribute("titleSession", blogFormSession.getTitle());
+			model.addAttribute("contentSession", blogFormSession.getContent());
+		}
 		
 		// 編集ボタンが押されたブログ情報を取得
-		Optional<Blog> targetBlog = blogService.findById(id);
+		Optional<Blog> targetBlog = blogService.findById(blogId);
 		
-		// ブログ情報を要素ごとに取得
-		String title = targetBlog.get().getTitle();
-		String content = targetBlog.get().getContent();
-		Integer user_id = targetBlog.get().getUserId();
-		
-		blogDto.setId(Integer.parseInt(id.toString()));
-		blogDto.setTitle(title);
-		blogDto.setContent(content);
-		blogDto.setUserId(user_id);
-		
-		session.setAttribute("id", blogDto.getId());
-		
-		model.addAttribute("blogDto", blogDto);
-		
+		this.session.setAttribute("blogId", targetBlog.get().getBlogId());
+		model.addAttribute("titleSession", targetBlog.get().getTitle());
+		model.addAttribute("contentSession", targetBlog.get().getContent());
+		model.addAttribute("blogForm", blogForm);
 		return "/blog/blogEdit";
 	}
 	
 	@PostMapping("/blogEditConfirm")
-	public String blogEditConfirm(@Validated @ModelAttribute BlogDto blogDto, BindingResult result, Model model) {
+	public String blogEditConfirm(
+			@Valid @ModelAttribute BlogForm blogForm,
+			BindingResult bindingResult,
+			Model model) {
 		
-		if (result.hasErrors()) {
+		if (bindingResult.hasErrors()) {
 			return "/blog/blogEdit";
 		}
 		
-		this.session.setAttribute("title", blogDto.getTitle());
-		this.session.setAttribute("content", blogDto.getContent());
-		
-		model.addAttribute("blogDto", blogDto);
-		model.addAttribute("id", session.getAttribute("id"));
-		
+		this.session.setAttribute("blogFormSession", blogForm);
+		model.addAttribute("blogForm", blogForm);
+		model.addAttribute("blogId", this.session.getAttribute("blogId"));
 		return "/blog/blogEditConfirm";
 	}
 	
 	@PostMapping("blogEditComplete")
-	public String blogEditComplete(@Validated @ModelAttribute BlogDto blogDto, BindingResult result, Model model) {
+	public String blogEditComplete(
+			@ModelAttribute BlogForm blogForm,
+			Model model) {
+				
+		BlogForm blogFormSession = (BlogForm) this.session.getAttribute("blogFormSession");
 		
-		// 現在日時を取得
-		Date dateNow = new Date();
-		
-		blogDto.setId((Integer)session.getAttribute("id"));
-		blogDto.setTitle((String)session.getAttribute("title"));
-		blogDto.setContent((String)session.getAttribute("content"));
-		blogDto.setUpdatedAt(dateNow);
-		
-	    model.addAttribute("blogDto", blogDto);
+		BlogDto blogDto = new BlogDto();
+		blogDto.setBlogId((Integer) session.getAttribute("blogId"));
+		blogDto.setTitle(blogFormSession.getTitle());
+		blogDto.setContent(blogFormSession.getContent());
 	    
-	    // ブログ登録
-	    blogService.edit(blogDto);
+		// ブログ編集
+		blogService.edit(blogDto);
 	    
-	    return "/blog/complete";
+		return "/blog/blogEditComplete";
 	}
 }

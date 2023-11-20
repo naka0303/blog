@@ -42,8 +42,12 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
 	
 	/**
 	 * ブログ編集
+	 * @param title
+	 * @param content
+	 * @param updatedAt
+	 * @param blogId
 	 */
 	@Modifying
-	@Query(value = "UPDATE Blog b SET b.title = :title, b.content = :content, b.updated_at = :updated_at WHERE b.id = :id")
-	public void edit(String title, String content, Date updated_at, Integer id);
+	@Query(value = "UPDATE Blog b SET b.title = :title, b.content = :content, b.updated_at = :updatedAt WHERE b.id = :blogId")
+	public void edit(String title, String content, Date updatedAt, Integer blogId);
 }
