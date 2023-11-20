@@ -15,9 +15,7 @@
 					<div class="card-header">ブログ投稿確認</div>
 					<div class="card-body">
 						<p>タイトル：<input type="text" class="form-control" name="title" placeholder="タイトル" th:value="*{title}" readonly /></p>
-						<span class="errorStr" th:errors="*{title}"></span>
 						<p>投稿内容：<textarea class="form-control form-control-lg" rows="20" name="content" placeholder="投稿内容" readonly>[[ *{content} ]]</textarea></p>
-						<span class="errorStr" th:errors="*{content}"></span>
 						<br>
 						<div class="text-center">
 							<button class="btn btn-lg btn-primary btn-block" name="blogEditConfirm" value="blogEditConfirm" type="submit">登録</button>
