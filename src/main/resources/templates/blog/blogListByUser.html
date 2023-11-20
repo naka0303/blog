@@ -21,11 +21,11 @@
 		<tbody>
 			<div th:each="blog : ${blogListByUser}">
 			<tr>
-				<td>[[ ${blog.id} ]]</td>
-				<td><a th:href="@{'/blogDetail/' + ${blog.id}}">[[ ${blog.title} ]]</a></td>
+				<td>[[ ${blog.blogId} ]]</td>
+				<td><a th:href="@{'/blogDetail/' + ${blog.blogId}}">[[ ${blog.title} ]]</a></td>
 				<td>[[ ${blog.createdAt} ]]</td>
-				<td><a th:href="@{'/blogEdit/' + ${blog.id}}">編集</a></td>
-				<td><a th:href="@{'/blogDelete/' + ${blog.id}}">削除</a></td>
+				<td><a th:href="@{'/blogEdit/' + ${blog.blogId}}">編集</a></td>
+				<td><a th:href="@{'/blogDelete/' + ${blog.blogId}}">削除</a></td>
 				<td></td>
 			</tr>
   			</div>

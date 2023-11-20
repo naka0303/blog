@@ -10,7 +10,7 @@ import jakarta.validation.constraints.NotBlank;
 public class BlogDto {
 	
 	// ブログID
-	private Integer id;
+	private Integer blog_id;
 	
 	// ブログタイトル
 	@NotBlank
@@ -34,12 +34,12 @@ public class BlogDto {
 	// 削除日時
 	private Date deleted_at;
 	
-	public Integer getId() {
-		return id;
+	public Integer getBlogId() {
+		return blog_id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setBlogId(Integer blog_id) {
+		this.blog_id = blog_id;
 	}
 
 	public String getTitle() {

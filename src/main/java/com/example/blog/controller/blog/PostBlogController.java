@@ -1,25 +1,21 @@
 package com.example.blog.controller.blog;
 
-import java.text.ParseException;
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.blog.model.blog.BlogDto;
-import com.example.blog.model.user.User;
+import com.example.blog.model.blog.BlogForm;
 import com.example.blog.service.BlogService;
 import com.example.blog.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 
 @Controller
@@ -41,65 +37,49 @@ public class PostBlogController {
 	}
 	
 	@GetMapping("/input")
-	public String input(@ModelAttribute BlogDto blogDto, Model model) {
+	public String input(
+			@ModelAttribute BlogForm blogForm,
+			Model model) {
 		
-		String title = (String)session.getAttribute("title");
-		String content = (String)session.getAttribute("content");
+		BlogForm blogFormSession = (BlogForm) this.session.getAttribute("blogFormSession");
+		if (blogFormSession != null) {
+			model.addAttribute("titleSession", blogFormSession.getTitle());
+			model.addAttribute("contentSession", blogFormSession.getContent());
+		}
 		
-		blogDto.setTitle(title);
-		blogDto.setContent(content);
-		
-		model.addAttribute("blogDto", blogDto);
-	    
+		model.addAttribute("blogForm", blogForm);
 		return "/blog/input";
 	}
 	
 	@PostMapping("/confirm")
-	public String confirm(@Validated @ModelAttribute BlogDto blogDto, BindingResult result, Model model) {		
+	public String confirm(
+			@Valid @ModelAttribute BlogForm blogForm,
+			BindingResult bindingResult,
+			Model model) {
 		
-		if (result.hasErrors()) {
+		// 入力エラーが発生した場合は、入力画面へ遷移
+		if (bindingResult.hasErrors()) {
 			return "/blog/input";
 		}
-			
-		// ログインユーザーを取得
-		String username = SecurityContextHolder.getContext().getAuthentication().getName();
-		User loginUser = userServive.findByUsername(username);
-		Integer user_id = loginUser.getUserId();
-		blogDto.setUserId(user_id);
 		
-		String title = blogDto.getTitle();
-		String content = blogDto.getContent();
-		
-		session.setAttribute("user_id", user_id.toString());
-		session.setAttribute("title", title);
-		session.setAttribute("content", content);
-		
-		model.addAttribute("blogDto", blogDto);
-		
+		this.session.setAttribute("blogFormSession", blogForm);
+		model.addAttribute("blogForm", blogForm);
 		return "/blog/confirm";
 	}
 	
 	@PostMapping("complete")
-	public String complete(@Validated @ModelAttribute BlogDto blogDto, BindingResult result, Model model) throws ParseException {
-		// 現在日時を取得
-		Date dateNow = new Date();
+	public String complete(
+			@ModelAttribute BlogForm blogForm,
+			Model model) {
 		
-		String title = (String) session.getAttribute("title");
-		String content = (String) session.getAttribute("content");
-		String user_id = (String) session.getAttribute("user_id");
+		BlogForm blogFormSession = (BlogForm) this.session.getAttribute("blogFormSession");
 		
-		blogDto.setTitle(title);
-		blogDto.setContent(content);
-		blogDto.setUserId(Integer.parseInt(user_id));
-		blogDto.setCreatedAt(dateNow);
-		blogDto.setUpdatedAt(null);
-		blogDto.setDeletedAt(null);
-		
-		model.addAttribute("blogDto", blogDto);
+		BlogDto blogDto = new BlogDto();
+		blogDto.setTitle(blogFormSession.getTitle());
+		blogDto.setContent(blogFormSession.getContent());
 		
 		// ブログ登録
 		blogService.insert(blogDto);
-	    
 		return "/blog/complete";
 	}
 }

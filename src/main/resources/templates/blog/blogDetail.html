@@ -8,8 +8,8 @@
 <body>
 	<div th:replace="commons/fragment::header"></div>
 	<br>
-	<h1 class="display-4">[[ ${title} ]]</h1>
-	<p>[[ ${content} ]]</p>
+	<p>タイトル：<input type="text" class="form-control" name="title" placeholder="タイトル" th:value="${title}" readonly /></p>
+	<p>投稿内容：<textarea class="form-control form-control-lg" rows="20" name="content" placeholder="投稿内容" readonly>[[ ${content} ]]</textarea></p>
 	<br>
 	<div class="text-center">
 		<th:block th:if="${#strings.contains(preUri, 'blogListByUser')}">

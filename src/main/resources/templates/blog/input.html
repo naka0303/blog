@@ -4,19 +4,20 @@
 	<div th:replace="commons/fragment::meta"></div>
 	<div th:replace="commons/fragment::link"></div>
 	<div th:replace="commons/fragment::title"></div>
+	<link th:href="@{/css/blog/input.css}" rel="stylesheet">
 </head>
 <body>
 	<div th:replace="commons/fragment::header"></div>
 	<br>
-	<form enctype="multipart/form-data" th:action="@{/confirm}" th:object="${blogDto}" method="post" novalidate>
+	<form enctype="multipart/form-data" th:action="@{/confirm}" th:object="${blogForm}" method="post" novalidate>
 	    <div class="container">
 			<div class="wrapper">
 				<div class="card bg-light">
 					<div class="card-header">ブログ投稿フォーム</div>
 					<div class="card-body">
-						<p>タイトル：<input type="text" class="form-control" name="title" placeholder="タイトル" th:value="${blogDto.getTitle}" /></p>
+						<p>タイトル：<input type="text" class="form-control" name="title" placeholder="タイトル" th:value="${titleSession}" /></p>
 						<span class="errorStr" th:errors="*{title}"></span>
-						<p>投稿内容：<textarea class="form-control form-control-lg" rows="3" name="content" placeholder="投稿内容">[[ ${blogDto.getContent} ]]</textarea></p>
+						<p>投稿内容：<textarea class="form-control form-control-lg" rows="20" name="content" placeholder="投稿内容">[[ ${contentSession} ]]</textarea></p>
 						<span class="errorStr" th:errors="*{content}"></span>
 						<br>
 						<div class="text-center">

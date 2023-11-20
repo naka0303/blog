@@ -10,14 +10,14 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "posted_blog")
+@Table(name = "blogs")
 public class Blog {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name="blog_id")
 	// ブログID
-	private Integer id;
+	private Integer blog_id;
 	
 	@Column(name="title")
 	// ブログタイトル
@@ -43,12 +43,12 @@ public class Blog {
 	// 削除日時
 	private Date deleted_at;
 
-	public Integer getId() {
-		return id;
+	public Integer getBlogId() {
+		return blog_id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setBlogId(Integer blog_id) {
+		this.blog_id = blog_id;
 	}
 
 	public String getTitle() {

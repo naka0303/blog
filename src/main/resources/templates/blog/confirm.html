@@ -8,18 +8,18 @@
 <body>
 	<div th:replace="commons/fragment::header"></div>
 	<br>
-	<form enctype="multipart/form-data" th:action="@{/complete}" th:object="${blogDto}" method="post" novalidate>
+	<form enctype="multipart/form-data" th:action="@{/complete}" th:object="${blogForm}" method="post" novalidate>
 		<div class="container">
 			<div class="wrapper">
 				<div class="card bg-light">
 					<div class="card-header">ブログ投稿確認</div>
 					<div class="card-body">
-						<p>ブログタイトル： [[ ${blogDto.getTitle} ]]</p>
-						<p>投稿内容： [[ ${blogDto.getContent} ]]</p>
+						<p>タイトル：<input type="text" class="form-control" name="title" placeholder="タイトル" th:value="*{title}" readonly /></p>
+						<p>投稿内容：<textarea class="form-control form-control-lg" rows="20" name="content" placeholder="投稿内容" readonly>[[ *{content} ]]</textarea></p>
 						<br>
 						<div class="text-center">
-					    	<button class="btn btn-lg btn-primary btn-block" name="confirm" value="confirm" type="submit">登録</button>
-					    </div>
+							<button class="btn btn-lg btn-primary btn-block" name="confirm" value="confirm" type="submit">登録</button>
+						</div>
 					</div>
 				</div>
 			</div>
