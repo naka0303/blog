@@ -1,11 +1,11 @@
-package com.example.blog.model.blog;
+package com.example.blog.model.blogs;
 
 import org.hibernate.validator.constraints.Length;
 
 import jakarta.validation.constraints.NotBlank;
 
 
-public class BlogForm {
+public class BlogsForm {
 
 	// ブログタイトル
 	@NotBlank

@@ -7,7 +7,7 @@ import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class BlogUserDto {
+public class BlogsUsersDto {
 	
 	@Column(name="id")
 	// ブログID
@@ -25,7 +25,7 @@ public class BlogUserDto {
 	// 登録日時
 	private Date created_at;
 
-	public BlogUserDto(Object[] objects) {
+	public BlogsUsersDto(Object[] objects) {
 		this(
 				(Integer)objects[0],
 				(String)objects[1],

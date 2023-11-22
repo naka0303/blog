@@ -1,4 +1,4 @@
-package com.example.blog.controller.user;
+package com.example.blog.controller.users;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.blog.model.user.UsersDto;
+import com.example.blog.model.users.UsersDto;
 import com.example.blog.service.UserService;
 
 import jakarta.servlet.http.HttpSession;

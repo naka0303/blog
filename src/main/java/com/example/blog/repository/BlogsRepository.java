@@ -8,11 +8,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
-import com.example.blog.model.BlogUserDto;
-import com.example.blog.model.blog.Blog;
+import com.example.blog.model.BlogsUsersDto;
+import com.example.blog.model.blogs.Blogs;
 
 
-public interface BlogRepository extends JpaRepository<Blog, Long> {
+public interface BlogsRepository extends JpaRepository<Blogs, Long> {
 	
 	/**
 	 * ブログ情報全取得
@@ -24,10 +24,10 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
 					"ORDER BY blogs.blog_id ASC", nativeQuery = true)
 	public List<Object[]> findAllJoinedUserRaw();
 	
-	default List<BlogUserDto> findAllJoinedUser() {
+	default List<BlogsUsersDto> findAllJoinedUser() {
 		return findAllJoinedUserRaw()
 				.stream()
-				.map(BlogUserDto::new)
+				.map(BlogsUsersDto::new)
 				.collect(Collectors.toList());
 	}
 	
@@ -38,7 +38,7 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
 	 */
 	@Query(value = "SELECT * FROM blogs " +
 					"WHERE user_id = :userId ORDER BY blog_id ASC", nativeQuery = true)
-	public List<Blog> findByUser(Integer userId);
+	public List<Blogs> findByUser(Integer userId);
 	
 	/**
 	 * ブログ編集
@@ -48,6 +48,6 @@ public interface BlogRepository extends JpaRepository<Blog, Long> {
 	 * @param blogId
 	 */
 	@Modifying
-	@Query(value = "UPDATE Blog b SET b.title = :title, b.content = :content, b.updated_at = :updatedAt WHERE b.id = :blogId")
+	@Query(value = "UPDATE Blogs b SET b.title = :title, b.content = :content, b.updated_at = :updatedAt WHERE b.id = :blogId")
 	public void edit(String title, String content, Date updatedAt, Integer blogId);
 }

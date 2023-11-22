@@ -1,4 +1,4 @@
-package com.example.blog.controller.blog;
+package com.example.blog.controller.blogs;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import com.example.blog.model.blog.BlogDto;
-import com.example.blog.model.blog.BlogForm;
-import com.example.blog.service.BlogService;
+import com.example.blog.model.blogs.BlogsDto;
+import com.example.blog.model.blogs.BlogsForm;
+import com.example.blog.service.BlogsService;
 import com.example.blog.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -27,7 +27,7 @@ public class PostBlogController {
 	protected MessageSource messageSource;
 	
 	@Autowired
-	BlogService blogService;
+	BlogsService blogsService;
 	
 	@Autowired
 	UserService userServive;
@@ -38,22 +38,22 @@ public class PostBlogController {
 	
 	@GetMapping("/input")
 	public String input(
-			@ModelAttribute BlogForm blogForm,
+			@ModelAttribute BlogsForm blogsForm,
 			Model model) {
 		
-		BlogForm blogFormSession = (BlogForm) this.session.getAttribute("blogFormSession");
-		if (blogFormSession != null) {
-			model.addAttribute("titleSession", blogFormSession.getTitle());
-			model.addAttribute("contentSession", blogFormSession.getContent());
+		BlogsForm blogsFormSession = (BlogsForm) this.session.getAttribute("blogsFormSession");
+		if (blogsFormSession != null) {
+			model.addAttribute("titleSession", blogsFormSession.getTitle());
+			model.addAttribute("contentSession", blogsFormSession.getContent());
 		}
 		
-		model.addAttribute("blogForm", blogForm);
+		model.addAttribute("blogsForm", blogsForm);
 		return "/blog/input";
 	}
 	
 	@PostMapping("/confirm")
 	public String confirm(
-			@Valid @ModelAttribute BlogForm blogForm,
+			@Valid @ModelAttribute BlogsForm blogsForm,
 			BindingResult bindingResult,
 			Model model) {
 		
@@ -62,24 +62,24 @@ public class PostBlogController {
 			return "/blog/input";
 		}
 		
-		this.session.setAttribute("blogFormSession", blogForm);
-		model.addAttribute("blogForm", blogForm);
+		this.session.setAttribute("blogsFormSession", blogsForm);
+		model.addAttribute("blogsForm", blogsForm);
 		return "/blog/confirm";
 	}
 	
 	@PostMapping("complete")
 	public String complete(
-			@ModelAttribute BlogForm blogForm,
+			@ModelAttribute BlogsForm blogsForm,
 			Model model) {
 		
-		BlogForm blogFormSession = (BlogForm) this.session.getAttribute("blogFormSession");
+		BlogsForm blogsFormSession = (BlogsForm) this.session.getAttribute("blogsFormSession");
 		
-		BlogDto blogDto = new BlogDto();
-		blogDto.setTitle(blogFormSession.getTitle());
-		blogDto.setContent(blogFormSession.getContent());
+		BlogsDto blogsDto = new BlogsDto();
+		blogsDto.setTitle(blogsFormSession.getTitle());
+		blogsDto.setContent(blogsFormSession.getContent());
 		
 		// ブログ登録
-		blogService.insert(blogDto);
+		blogsService.insert(blogsDto);
 		return "/blog/complete";
 	}
 }

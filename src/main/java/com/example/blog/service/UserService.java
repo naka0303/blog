@@ -7,8 +7,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.blog.model.user.Users;
-import com.example.blog.model.user.UsersDto;
+import com.example.blog.model.users.Users;
+import com.example.blog.model.users.UsersDto;
 import com.example.blog.repository.UserRepository;
 
 import jakarta.transaction.Transactional;

@@ -1,25 +1,17 @@
-package com.example.blog.model.blog;
+package com.example.blog.model.blogs;
 
 import java.util.Date;
 
-import org.hibernate.validator.constraints.Length;
 
-import jakarta.validation.constraints.NotBlank;
-
-
-public class BlogDto {
+public class BlogsDto {
 	
 	// ブログID
 	private Integer blog_id;
 	
 	// ブログタイトル
-	@NotBlank
-	@Length(min=1, max=50)
 	private String title;
 	
 	// 投稿内容
-	@NotBlank
-	@Length(min=1, max=3000)
 	private String content;
 	
 	// ユーザーID(registered_userテーブルのuser_idと同じ)
