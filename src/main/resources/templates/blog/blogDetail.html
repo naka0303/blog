@@ -11,15 +11,6 @@
 	<br>
 	<p>タイトル：<input type="text" class="form-control" name="title" placeholder="タイトル" th:value="${title}" readonly /></p>
 	<p>投稿内容：<textarea class="form-control form-control-lg" rows="20" name="content" placeholder="投稿内容" readonly>[[ ${content} ]]</textarea></p>
-	<br>
-	<div class="text-center">
-		<th:block th:if="${#strings.contains(preUri, 'blogListByUser')}">
-			<a th:href="@{/blogListByUser}" class="btn btn-secondary">投稿ブログ一覧へ</a>
-		</th:block>
-		<th:block th:unless="${#strings.contains(preUri, 'blogListByUser')}">
-			<a th:href="@{/blogList}" class="btn btn-secondary">ブログ一覧へ</a>
-		</th:block>
-	</div>
 	<hr>
 	<p>コメント：</p>
 	<div class="flexbox">

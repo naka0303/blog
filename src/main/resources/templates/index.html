@@ -5,14 +5,16 @@
 	<div th:replace="commons/fragment::meta"></div>
 	<div th:replace="commons/fragment::link"></div>
 	<div th:replace="commons/fragment::title"></div>
+	<link th:href="@{/css/index.css}" rel="stylesheet">
 </head>
 <body>
 	<div th:replace="commons/fragment::header"></div>
-	<br>
-	<a th:href="@{/input}" class="btn btn-secondary">ブログ投稿へ</a>
-	<br><br>
-  	<a th:href="@{/blogList}" class="btn btn-secondary">ブログ一覧へ</a>
-  	
+	<div class="flexbox">
+		<div th:each="blog : ${blogList}" class="flexbox-item">
+			<a th:href="@{'/blogDetail/' + ${blog.getId}}">[[ ${blog.title} ]]</a></td>
+			<p>[[ ${blog.username} ]]</p>
+		</div>
+	</div>
   	<div th:replace="commons/fragment::scripts"></div>
 </body>
 </html>
