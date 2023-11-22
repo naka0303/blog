@@ -1,0 +1,9 @@
+@charset "UTF-8";
+.flexbox {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.flexbox-item {
+	padding: 10px;
+}

@@ -39,8 +39,8 @@ public class WebSecurityConfig {
         return http.build();
 	}
 	
-	@Bean // このメソッドの返り値をSpringのBeanとして登録します
-    public PasswordEncoder passwordEncoder() { // パスワードエンコーダー（パスワードのハッシュ化）を提供するメソッド
-        return new BCryptPasswordEncoder(); // パスワードをBCrypt方式でハッシュ化するエンコーダーを返します
+	@Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
     }
 }

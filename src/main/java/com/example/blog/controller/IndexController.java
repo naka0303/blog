@@ -1,7 +1,6 @@
 package com.example.blog.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,17 +17,12 @@ public class IndexController {
 	
 	private HttpSession session;
 	
-	@Value("${title.name}")
-	private String titleName;
-	
-	@Value("${app.name}")
-	private String appName;
 	
 	@Autowired
 	protected MessageSource messageSource;
 	
 	@Autowired
-	BlogsService blogService;
+	BlogsService blogsService;
 	
 	@Autowired
 	UserService userServive;
@@ -38,10 +32,16 @@ public class IndexController {
 	}
 	
 	@GetMapping("/index")
-	public String index(Model model) {
+	public String index(
+			Model model) {
 		
 		// セッション破棄
-		this.session.removeAttribute("blogFormSession");
+		this.session.removeAttribute("blogsFormSession");
+		
+		// URIをセッション管理
+		session.setAttribute("preUri", blogsService.getUri());
+				
+		model.addAttribute("blogList", blogsService.findAllJoinedUser());
 		
 		return "index";
 	}

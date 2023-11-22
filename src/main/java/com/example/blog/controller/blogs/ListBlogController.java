@@ -32,19 +32,6 @@ public class ListBlogController {
 		this.session = session;
 	}
 	
-	@GetMapping("/blogList")
-	public String blogList(
-			Model model) {
-		
-		// URIをセッション管理
-		session.setAttribute("preUri", blogsService.getUri());
-		
-		// 値渡し
-		model.addAttribute("blogList", blogsService.findAllJoinedUser()); // 全ブログ情報
-		
-		return "/blog/blogList";
-	}
-	
 	@GetMapping("/blogListByUser")
 	public String blogListByUser(
 			Model model) {
