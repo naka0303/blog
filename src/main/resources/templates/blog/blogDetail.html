@@ -21,6 +21,7 @@
 		</th:block>
 	</div>
 	<hr>
+	<p>コメント：</p>
 	<div class="flexbox">
 		<div th:each="content : ${commentContents}">
 			<p>[[ ${content} ]]</p>
@@ -29,14 +30,15 @@
 			<p>[[ ${username} ]]</p>
 		</div>
 	</div>
-	<form enctype="multipart/form-data" th:action="@{'/blogComment/' + ${blogId}}" th:object="${commentsForm}" method="post" novalidate>
-		<textarea class="form-control form-control-lg" rows="3" name="content" placeholder="ブログコメント"></textarea>
-		<br>
-		<div class="text-center">
-			<button class="btn btn-lg btn-primary btn-block" name="blogComment" type="submit">コメント</button>
-		</div>
-	</form>
-	
+	<th:block th:unless="${#strings.contains(preUri, 'blogListByUser')}">
+		<form enctype="multipart/form-data" th:action="@{'/blogComment/' + ${blogId}}" th:object="${commentsForm}" method="post" novalidate>
+			<textarea class="form-control form-control-lg" rows="3" name="content" placeholder="ブログコメント"></textarea>
+			<br>
+			<div class="text-center">
+				<button class="btn btn-lg btn-primary btn-block" name="blogComment" type="submit">コメント</button>
+			</div>
+		</form>
+	</th:block>
 	<div th:replace="commons/fragment::scripts"></div>
 </body>
 </html>
