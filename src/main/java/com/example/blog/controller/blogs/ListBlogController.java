@@ -1,4 +1,4 @@
-package com.example.blog.controller.blog;
+package com.example.blog.controller.blogs;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.example.blog.model.user.Users;
-import com.example.blog.service.BlogService;
+import com.example.blog.model.users.Users;
+import com.example.blog.service.BlogsService;
 import com.example.blog.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -23,7 +23,7 @@ public class ListBlogController {
 	protected MessageSource messageSource;
 	
 	@Autowired
-	BlogService blogService;
+	BlogsService blogsService;
 	
 	@Autowired
 	UserService userServive;
@@ -37,10 +37,10 @@ public class ListBlogController {
 			Model model) {
 		
 		// URIをセッション管理
-		session.setAttribute("preUri", blogService.getUri());
+		session.setAttribute("preUri", blogsService.getUri());
 		
 		// 値渡し
-		model.addAttribute("blogList", blogService.findAllJoinedUser()); // 全ブログ情報
+		model.addAttribute("blogList", blogsService.findAllJoinedUser()); // 全ブログ情報
 		
 		return "/blog/blogList";
 	}
@@ -55,10 +55,9 @@ public class ListBlogController {
 		Integer userId = loginUser.getUserId();
 		
 		// URIをセッション管理
-		session.setAttribute("preUri", blogService.getUri());
+		session.setAttribute("preUri", blogsService.getUri());
 		
-		// 値渡し
-		model.addAttribute("blogListByUser", blogService.findByUser(userId)); // 指定ユーザーの全ブログ情報取得
+		model.addAttribute("blogListByUser", blogsService.findByUser(userId)); // 指定ユーザーの全ブログ情報取得
 		
 		return "/blog/blogListByUser";
 	}

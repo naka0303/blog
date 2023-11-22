@@ -7,7 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.example.blog.service.BlogService;
+import com.example.blog.service.BlogsService;
 import com.example.blog.service.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -28,7 +28,7 @@ public class IndexController {
 	protected MessageSource messageSource;
 	
 	@Autowired
-	BlogService blogService;
+	BlogsService blogService;
 	
 	@Autowired
 	UserService userServive;

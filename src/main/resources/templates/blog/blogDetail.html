@@ -4,6 +4,7 @@
 	<div th:replace="commons/fragment::meta"></div>
 	<div th:replace="commons/fragment::link"></div>
 	<div th:replace="commons/fragment::title"></div>
+	<link th:href="@{/css/blog/blogDetail.css}" rel="stylesheet">
 </head>
 <body>
 	<div th:replace="commons/fragment::header"></div>
@@ -19,6 +20,22 @@
 			<a th:href="@{/blogList}" class="btn btn-secondary">ブログ一覧へ</a>
 		</th:block>
 	</div>
+	<hr>
+	<div class="flexbox">
+		<div th:each="content : ${commentContents}">
+			<p>[[ ${content} ]]</p>
+		</div>
+		<div th:each="username : ${commentUsername}">
+			<p>[[ ${username} ]]</p>
+		</div>
+	</div>
+	<form enctype="multipart/form-data" th:action="@{'/blogComment/' + ${blogId}}" th:object="${commentsForm}" method="post" novalidate>
+		<textarea class="form-control form-control-lg" rows="3" name="content" placeholder="ブログコメント"></textarea>
+		<br>
+		<div class="text-center">
+			<button class="btn btn-lg btn-primary btn-block" name="blogComment" type="submit">コメント</button>
+		</div>
+	</form>
 	
 	<div th:replace="commons/fragment::scripts"></div>
 </body>
