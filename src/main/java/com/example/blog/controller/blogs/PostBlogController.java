@@ -62,6 +62,10 @@ public class PostBlogController {
 			return "/blog/input";
 		}
 		
+		// サムネイル画像をbyte型に変換
+		byte[] thumbnailBytes = blogsService.getImageBytes(blogsForm.getThumbnail());
+		
+		this.session.setAttribute("thumbnailBytes", thumbnailBytes);
 		this.session.setAttribute("blogsFormSession", blogsForm);
 		model.addAttribute("blogsForm", blogsForm);
 		return "/blog/confirm";
@@ -77,6 +81,7 @@ public class PostBlogController {
 		BlogsDto blogsDto = new BlogsDto();
 		blogsDto.setTitle(blogsFormSession.getTitle());
 		blogsDto.setContent(blogsFormSession.getContent());
+		blogsDto.setThumbnail((byte[]) this.session.getAttribute("thumbnailBytes"));
 		
 		// ブログ登録
 		blogsService.insert(blogsDto);

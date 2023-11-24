@@ -18,7 +18,7 @@ public interface BlogsRepository extends JpaRepository<Blogs, Long> {
 	 * ブログ情報全取得
 	 * @return 
 	 */
-	@Query(value = "SELECT blogs.blog_id, blogs.title, users.username, blogs.created_at " +
+	@Query(value = "SELECT blogs.blog_id, blogs.title, users.username, blogs.thumbnail, blogs.created_at " +
 					"FROM blogs " +
 					"INNER JOIN users ON (blogs.user_id = users.user_id) " +
 					"ORDER BY blogs.blog_id ASC", nativeQuery = true)

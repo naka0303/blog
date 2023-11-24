@@ -14,6 +14,9 @@ public class BlogsDto {
 	// 投稿内容
 	private String content;
 	
+	// サムネイル
+	private byte[] thumbnail;
+	
 	// ユーザーID(registered_userテーブルのuser_idと同じ)
 	private Integer user_id;
 	
@@ -48,6 +51,14 @@ public class BlogsDto {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+	
+	public byte[] getThumbnail() {
+		return thumbnail;
+	}
+
+	public void setThumbnail(byte[] thumbnail) {
+		this.thumbnail = thumbnail;
 	}
 
 	public Integer getUserId() {

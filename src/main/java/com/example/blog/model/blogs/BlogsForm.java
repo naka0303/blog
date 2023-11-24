@@ -1,6 +1,7 @@
 package com.example.blog.model.blogs;
 
 import org.hibernate.validator.constraints.Length;
+import org.springframework.web.multipart.MultipartFile;
 
 import jakarta.validation.constraints.NotBlank;
 
@@ -16,6 +17,9 @@ public class BlogsForm {
 	@NotBlank
 	@Length(min=1, max=3000)
 	private String content;
+	
+	// サムネイル
+	private MultipartFile thumbnail;
 
 	public String getTitle() {
 		return title;
@@ -31,5 +35,13 @@ public class BlogsForm {
 
 	public void setContent(String content) {
 		this.content = content;
+	}
+	
+	public MultipartFile getThumbnail() {
+		return thumbnail;
+	}
+
+	public void setThumbnail(MultipartFile thumbnail) {
+		this.thumbnail = thumbnail;
 	}
 }

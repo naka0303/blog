@@ -9,12 +9,17 @@
 </head>
 <body>
 	<div th:replace="commons/fragment::header"></div>
+	
 	<div class="flexbox">
-		<div th:each="blog : ${blogList}" class="flexbox-item">
-			<a th:href="@{'/blogDetail/' + ${blog.getId}}">[[ ${blog.title} ]]</a></td>
-			<p>[[ ${blog.username} ]]</p>
+		<div th:each="blogDict : ${allBlogDict}" class="flexbox-item">
+			<a th:href="@{'/blogDetail/' + ${blogDict.key}}">
+				<img th:src="${blogDict.value.get(2)}">
+				<p class="title">[[ ${blogDict.value.get(0)} ]]</p>
+				<p class="username">[[ ${blogDict.value.get(1)} ]]</p>
+			</a>
 		</div>
 	</div>
+	
   	<div th:replace="commons/fragment::scripts"></div>
 </body>
 </html>

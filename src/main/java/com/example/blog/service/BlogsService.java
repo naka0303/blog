@@ -1,5 +1,6 @@
 package com.example.blog.service;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -7,6 +8,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.blog.model.BlogsUsersDto;
@@ -49,6 +51,7 @@ public class BlogsService {
 		
 		blogs.setTitle(blogsDto.getTitle());
 		blogs.setContent(blogsDto.getContent());
+		blogs.setThumbnail(blogsDto.getThumbnail());
 		blogs.setUserId(loginUser.getUserId());
 		blogs.setCreatedAt(new Date());
 		blogs.setUpdatedAt(null);
@@ -115,5 +118,18 @@ public class BlogsService {
 	 */
 	public Blogs findDetail(Long blogId) {
 		return blogsRepository.findById(blogId).get();
+	}
+	
+	public byte[] getImageBytes(MultipartFile multipartFile) {
+		
+		try {
+			byte[] bytes = multipartFile.getBytes();
+			
+			return bytes;
+		} catch (IOException e) {
+			e.printStackTrace();
+			
+			return null;
+		}
 	}
 }

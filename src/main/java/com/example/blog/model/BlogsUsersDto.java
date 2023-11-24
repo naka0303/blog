@@ -9,9 +9,9 @@ import lombok.AllArgsConstructor;
 @AllArgsConstructor
 public class BlogsUsersDto {
 	
-	@Column(name="id")
+	@Column(name="blog_id")
 	// ブログID
-	private Integer id;
+	private Integer blog_id;
 	
 	@Column(name="title")
 	// ブログタイトル
@@ -20,6 +20,10 @@ public class BlogsUsersDto {
 	@Column(name="username")
 	// ユーザー名
 	private String username;
+	
+	@Column(name="thumbnail")
+	// サムネイル画像
+	private byte[] thumbnail;
 	
 	@Column(name="created_at")
 	// 登録日時
@@ -30,16 +34,17 @@ public class BlogsUsersDto {
 				(Integer)objects[0],
 				(String)objects[1],
 				(String)objects[2],
-				Date.from((Instant)objects[3])
+				(byte[])objects[3],
+				Date.from((Instant)objects[4])
 				);
 	}
 
-	public Integer getId() {
-		return id;
+	public Integer getBlogId() {
+		return blog_id;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setBlogId(Integer blog_id) {
+		this.blog_id = blog_id;
 	}
 
 	public String getTitle() {
@@ -56,6 +61,14 @@ public class BlogsUsersDto {
 
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	
+	public byte[] getThumbnail() {
+		return thumbnail;
+	}
+
+	public void setThumbnail(byte[] thumbnail) {
+		this.thumbnail = thumbnail;
 	}
 
 	public Date getCreatedAt() {
